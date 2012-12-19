@@ -109,9 +109,10 @@ public class Game {
                 if (currentPlayer == players.size()) currentPlayer = 0;
                 return winner;
             } else {
+                boolean winner = !didCurrentPlayerWin();
                 currentPlayer++;
                 if (currentPlayer == players.size()) currentPlayer = 0;
-                return true;
+                return winner;
             }
         } else {
             System.out.println("Answer was corrent!!!!");
