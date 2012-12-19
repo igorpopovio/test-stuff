@@ -91,7 +91,6 @@ public class Game {
             log(rockQuestions.removeFirst());
     }
 
-
     private String currentCategory() {
         if (places[currentPlayer] == 0) return "Pop";
         if (places[currentPlayer] == 4) return "Pop";
