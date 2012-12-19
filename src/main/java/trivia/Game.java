@@ -56,20 +56,20 @@ public class Game {
     }
 
     private void doIfCurrentPlayerIsInPenaltyBox(int roll) {
-        if (roll % 2 != 0) moveCurrentPlayerOutOfPenaltyBox(roll);
-        else keepCurrentPlayerInPenaltyBox();
+        if (roll % 2 != 0) {
+            moveCurrentPlayerOutOfPenaltyBox();
+            doIfCurrentPlayerIsNotInPenaltyBox(roll);
+        } else keepCurrentPlayerInPenaltyBox();
     }
 
     private void keepCurrentPlayerInPenaltyBox() {
-        System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
         isGettingOutOfPenaltyBox = false;
+        System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
     }
 
-    private void moveCurrentPlayerOutOfPenaltyBox(int roll) {
+    private void moveCurrentPlayerOutOfPenaltyBox() {
         isGettingOutOfPenaltyBox = true;
-
         System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-        doIfCurrentPlayerIsNotInPenaltyBox(roll);
     }
 
     private void askQuestion() {
@@ -104,7 +104,7 @@ public class Game {
             advanceToNextPlayer();
             return winner;
         }
-        if (!inPenaltyBox[currentPlayer])   {
+        if (!inPenaltyBox[currentPlayer]) {
             correctAnswer();
         }
         boolean winner = didCurrentPlayerWin();
