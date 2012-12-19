@@ -29,11 +29,10 @@ public class GameRunner {
         do {
             game.roll(random.nextInt(5) + 1);
 
-            if (random.nextInt(9) == 7) {
+            if (random.nextInt(9) == 7)
                 notAWinner = game.wrongAnswer();
-            } else {
+            else
                 notAWinner = game.wasCorrectlyAnswered();
-            }
         } while (notAWinner);
     }
 }
