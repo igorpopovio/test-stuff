@@ -60,10 +60,14 @@ public class Game {
     }
 
     private void doIfCurrentPlayerIsInPenaltyBox(int roll) {
-        if (roll % 2 != 0) {
+        if (shouldMoveCurrentPlayerOutOfPenaltyBox(roll)) {
             moveCurrentPlayerOutOfPenaltyBox();
             doIfCurrentPlayerIsNotInPenaltyBox(roll);
         } else keepCurrentPlayerInPenaltyBox();
+    }
+
+    private boolean shouldMoveCurrentPlayerOutOfPenaltyBox(int roll) {
+        return roll % 2 != 0;
     }
 
     private void keepCurrentPlayerInPenaltyBox() {
