@@ -40,12 +40,12 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (inPenaltyBox[currentPlayer]) doIfCurrentPlayerIsInPenaltyBox(roll);
-        else doIfCurrentPlayerIsNotInPenaltyBox(roll);
+        if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
+        else doIfNotInPenaltyBox(roll);
     }
 
-    private void doIfCurrentPlayerIsNotInPenaltyBox(int roll) {
-        updatePlaceForCurrentPlayer(roll);
+    private void doIfNotInPenaltyBox(int roll) {
+        updatePlace(roll);
 
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
@@ -54,28 +54,28 @@ public class Game {
         askQuestion();
     }
 
-    private void updatePlaceForCurrentPlayer(int roll) {
+    private void updatePlace(int roll) {
         places[currentPlayer] = places[currentPlayer] + roll;
         if (places[currentPlayer] > 11) places[currentPlayer] -= 12;
     }
 
-    private void doIfCurrentPlayerIsInPenaltyBox(int roll) {
-        if (shouldMoveCurrentPlayerOutOfPenaltyBox(roll)) {
-            moveCurrentPlayerOutOfPenaltyBox();
-            doIfCurrentPlayerIsNotInPenaltyBox(roll);
-        } else keepCurrentPlayerInPenaltyBox();
+    private void doIfInPenaltyBox(int roll) {
+        if (shouldMoveOutOfPenaltyBox(roll)) {
+            moveOutOfPenaltyBox();
+            doIfNotInPenaltyBox(roll);
+        } else keepInPenaltyBox();
     }
 
-    private boolean shouldMoveCurrentPlayerOutOfPenaltyBox(int roll) {
+    private boolean shouldMoveOutOfPenaltyBox(int roll) {
         return roll % 2 != 0;
     }
 
-    private void keepCurrentPlayerInPenaltyBox() {
+    private void keepInPenaltyBox() {
         isGettingOutOfPenaltyBox = false;
         System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
     }
 
-    private void moveCurrentPlayerOutOfPenaltyBox() {
+    private void moveOutOfPenaltyBox() {
         isGettingOutOfPenaltyBox = true;
         System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
     }
