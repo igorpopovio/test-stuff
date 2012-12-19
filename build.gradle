@@ -1,5 +1,7 @@
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+defaultTasks 'build', 'idea'
 
 repositories {
     mavenCentral()
@@ -10,7 +12,7 @@ dependencies {
                 'org.mockito:mockito-all:+'
 }
 
-
-sourceSets.main.java.srcDir 'src'
-sourceSets.test.java.srcDir 'test_src'
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.3'
+}
 
