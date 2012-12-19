@@ -2,12 +2,15 @@ package trivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game {
-    ArrayList players = new ArrayList();
-    int[] places = new int[6];
-    int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
+    public static final int MAX_PLAYERS = 6;
+
+    List players = new ArrayList();
+    int[] places = new int[MAX_PLAYERS];
+    int[] purses = new int[MAX_PLAYERS];
+    boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
 
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
