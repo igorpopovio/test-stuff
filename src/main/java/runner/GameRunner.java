@@ -7,22 +7,34 @@ import java.util.Random;
 public class GameRunner {
     private static boolean notAWinner;
 
-    public static void main(String[] args) {
-        Game aGame = new Game();
+    private Game game;
+    private Random random;
 
+    public static Game createGame() {
+        Game aGame = new Game();
         aGame.add("Chet");
         aGame.add("Pat");
         aGame.add("Sue");
+        return aGame;
+    }
 
-        Random rand = new Random();
+    public GameRunner(Game game, Random random) {
+        this.game = game;
+        this.random = random;
+    }
 
+    public static void main(String[] args) {
+        new GameRunner(createGame(), new Random()).run();
+    }
+
+    public void run() {
         do {
-            aGame.roll(rand.nextInt(5) + 1);
+            game.roll(random.nextInt(5) + 1);
 
-            if (rand.nextInt(9) == 7) {
-                notAWinner = aGame.wrongAnswer();
+            if (random.nextInt(9) == 7) {
+                notAWinner = game.wrongAnswer();
             } else {
-                notAWinner = aGame.wasCorrectlyAnswered();
+                notAWinner = game.wasCorrectlyAnswered();
             }
         } while (notAWinner);
     }
