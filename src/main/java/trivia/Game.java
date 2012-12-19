@@ -95,12 +95,13 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer]) {
-            if (isGettingOutOfPenaltyBox)
-                correctAnswer();
-            return advanceToNextPlayer();
-        } else
+        if (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) {
             correctAnswer();
+            return advanceToNextPlayer();
+        }
+        if (!inPenaltyBox[currentPlayer])   {
+            correctAnswer();
+        }
         return advanceToNextPlayer();
     }
 
