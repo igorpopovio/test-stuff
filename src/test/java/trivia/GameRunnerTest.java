@@ -54,9 +54,8 @@ public class GameRunnerTest {
     public void shouldGenerateGoldenMaster() throws Exception {
         recreateTheGoldenMasterDirectory();
 
-        long seed = 100;
-        saveConsoleOutputInFile(new File(getFileNameFor(seed)));
-        new GameRunner(createGame(), new Random(seed)).run();
+        saveConsoleOutputInFile(new File(getFileNameFor(DEFAULT_SEED)));
+        new GameRunner(createGame(), new Random(DEFAULT_SEED)).run();
     }
 
     @Test
