@@ -3,8 +3,6 @@ package trivia;
 import java.util.Random;
 
 public class GameRunner {
-    private static boolean isGameOver;
-
     private Game game;
     private Random random;
 
@@ -26,6 +24,7 @@ public class GameRunner {
     }
 
     public void run() {
+        boolean isGameOver;
         do {
             game.roll(random.nextInt(5) + 1);
 
