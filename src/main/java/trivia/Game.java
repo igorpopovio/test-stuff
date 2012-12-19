@@ -97,12 +97,16 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) {
             correctAnswer();
-            return advanceToNextPlayer();
+            boolean winner = didCurrentPlayerWin();
+            advanceToNextPlayer();
+            return winner;
         }
         if (!inPenaltyBox[currentPlayer])   {
             correctAnswer();
         }
-        return advanceToNextPlayer();
+        boolean winner = didCurrentPlayerWin();
+        advanceToNextPlayer();
+        return winner;
     }
 
     private void correctAnswer() {
@@ -114,11 +118,9 @@ public class Game {
                 + " Gold Coins.");
     }
 
-    private boolean advanceToNextPlayer() {
-        boolean winner = didCurrentPlayerWin();
+    private void advanceToNextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
-        return winner;
     }
 
     private boolean didCurrentPlayerWin() {
@@ -129,6 +131,8 @@ public class Game {
         System.out.println("Question was incorrectly answered");
         System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
         inPenaltyBox[currentPlayer] = true;
-        return advanceToNextPlayer();
+        boolean winner = didCurrentPlayerWin();
+        advanceToNextPlayer();
+        return winner;
     }
 }
