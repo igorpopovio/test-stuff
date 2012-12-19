@@ -20,6 +20,10 @@ public class Game {
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 
+    public void log(String format, Object... args) {
+        System.out.println(String.format(format, args));
+    }
+
     public Game() {
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
@@ -41,17 +45,13 @@ public class Game {
         System.out.println("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
-        else doIfNotInPenaltyBox(roll);
+        else doIfOutOfPenaltyBox(roll);
     }
 
-    private void doIfNotInPenaltyBox(int roll) {
+    private void doIfOutOfPenaltyBox(int roll) {
         updatePlace(roll);
         log("%s's new location is %d", players.get(currentPlayer), places[currentPlayer]);
         askQuestion();
-    }
-
-    public void log(String format, Object... args) {
-        System.out.println(String.format(format, args));
     }
 
     private void updatePlace(int roll) {
@@ -62,7 +62,7 @@ public class Game {
     private void doIfInPenaltyBox(int roll) {
         if (shouldMoveOutOfPenaltyBox(roll)) {
             moveOutOfPenaltyBox();
-            doIfNotInPenaltyBox(roll);
+            doIfOutOfPenaltyBox(roll);
         } else keepInPenaltyBox();
     }
 
