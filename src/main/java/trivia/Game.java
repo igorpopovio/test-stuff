@@ -104,15 +104,9 @@ public class Game {
                         + purses[currentPlayer]
                         + " Gold Coins.");
 
-                boolean winner = !didCurrentPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
-                return winner;
+                return advanceToNextPlayer();
             } else {
-                boolean winner = !didCurrentPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
-                return winner;
+                return advanceToNextPlayer();
             }
         } else {
             System.out.println("Answer was corrent!!!!");
@@ -122,11 +116,15 @@ public class Game {
                     + purses[currentPlayer]
                     + " Gold Coins.");
 
-            boolean winner = !didCurrentPlayerWin();
-            currentPlayer++;
-            if (currentPlayer == players.size()) currentPlayer = 0;
-            return winner;
+            return advanceToNextPlayer();
         }
+    }
+
+    private boolean advanceToNextPlayer() {
+        boolean winner = didCurrentPlayerWin();
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
+        return winner;
     }
 
     private boolean didCurrentPlayerWin() {
@@ -140,6 +138,6 @@ public class Game {
 
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
-        return true;
+        return false;
     }
 }

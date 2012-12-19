@@ -3,7 +3,7 @@ package trivia;
 import java.util.Random;
 
 public class GameRunner {
-    private static boolean notAWinner;
+    private static boolean isGameOver;
 
     private Game game;
     private Random random;
@@ -29,10 +29,10 @@ public class GameRunner {
         do {
             game.roll(random.nextInt(5) + 1);
 
-            if (random.nextInt(9) == 7)
-                notAWinner = game.wrongAnswer();
+            if (random.nextInt(9) != 7)
+                isGameOver = game.wasCorrectlyAnswered();
             else
-                notAWinner = game.wasCorrectlyAnswered();
-        } while (notAWinner);
+                isGameOver = game.wrongAnswer();
+        } while (!isGameOver);
     }
 }
