@@ -15,7 +15,7 @@ import static trivia.GameRunner.createGame;
 
 public class GameRunnerTest {
     private static final String GOLDEN_MASTER_DIR_NAME = "golden-master";
-    private static final long DEFAULT_SEED = 100;
+    private static final long DEFAULT_SEED_LIMIT = 100;
 
     void deleteRecursivelyAllFilesFrom(File parent) {
         if (parent.isDirectory())
@@ -41,6 +41,11 @@ public class GameRunnerTest {
         return String.format("%s/%d.txt", GOLDEN_MASTER_DIR_NAME, seed);
     }
 
+    private void saveConsoleOutputFor(long seed) throws FileNotFoundException {
+        saveConsoleOutputInFile(new File(getFileNameFor(seed)));
+        new GameRunner(createGame(), new Random(seed)).run();
+    }
+
     private void redirectConsoleOutputTo(ByteArrayOutputStream stream) {
         System.setOut(new PrintStream(stream));
     }
@@ -49,24 +54,29 @@ public class GameRunnerTest {
         return new Scanner(new File(getFileNameFor(seed))).useDelimiter("\\A").next();
     }
 
+    private void checkConsoleOutputWithGoldenMasterFor(long seed) throws FileNotFoundException {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        redirectConsoleOutputTo(stream);
+
+        new GameRunner(createGame(), new Random(seed)).run();
+
+        String expectedOutput = readFromGoldenMasterFor(seed);
+        String actualOutput = stream.toString();
+        assertEquals(expectedOutput, actualOutput);
+    }
+
     @Test
     @Ignore
     public void shouldGenerateGoldenMaster() throws Exception {
         recreateTheGoldenMasterDirectory();
 
-        saveConsoleOutputInFile(new File(getFileNameFor(DEFAULT_SEED)));
-        new GameRunner(createGame(), new Random(DEFAULT_SEED)).run();
+        for (long seed = 0; seed < DEFAULT_SEED_LIMIT; seed++)
+            saveConsoleOutputFor(seed);
     }
 
     @Test
     public void shouldCheckActualOutputWithGoldenMaster() throws Exception {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        redirectConsoleOutputTo(stream);
-
-        new GameRunner(createGame(), new Random(DEFAULT_SEED)).run();
-
-        String expectedOutput = readFromGoldenMasterFor(DEFAULT_SEED);
-        String actualOutput = stream.toString();
-        assertEquals(expectedOutput, actualOutput);
+        for (long seed = 0; seed < DEFAULT_SEED_LIMIT; seed++)
+            checkConsoleOutputWithGoldenMasterFor(seed);
     }
 }
