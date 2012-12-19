@@ -35,15 +35,13 @@ public class Game {
 
     public void add(String playerName) {
         players.add(playerName);
-
-        System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.size());
+        log("%s was added", playerName);
+        log("They are player number %d", players.size());
     }
 
     public void roll(int roll) {
-        System.out.println(players.get(currentPlayer) + " is the current player");
-        System.out.println("They have rolled a " + roll);
-
+        log("%s is the current player", players.get(currentPlayer));
+        log("They have rolled a %d", roll);
         if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
     }
@@ -72,24 +70,24 @@ public class Game {
 
     private void keepInPenaltyBox() {
         isGettingOutOfPenaltyBox = false;
-        System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+        log("%s is not getting out of the penalty box", players.get(currentPlayer));
     }
 
     private void moveOutOfPenaltyBox() {
         isGettingOutOfPenaltyBox = true;
-        System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+        log("%s is getting out of the penalty box", players.get(currentPlayer));
     }
 
     private void askQuestion() {
-        System.out.println("The category is " + currentCategory());
+        log("The category is %s", currentCategory());
         if (currentCategory() == "Pop")
-            System.out.println(popQuestions.removeFirst());
+            log(popQuestions.removeFirst());
         if (currentCategory() == "Science")
-            System.out.println(scienceQuestions.removeFirst());
+            log(scienceQuestions.removeFirst());
         if (currentCategory() == "Sports")
-            System.out.println(sportsQuestions.removeFirst());
+            log(sportsQuestions.removeFirst());
         if (currentCategory() == "Rock")
-            System.out.println(rockQuestions.removeFirst());
+            log(rockQuestions.removeFirst());
     }
 
 
@@ -122,12 +120,9 @@ public class Game {
     }
 
     private void correctAnswer() {
-        System.out.println("Answer was correct!!!!");
+        log("Answer was correct!!!!");
         purses[currentPlayer]++;
-        System.out.println(players.get(currentPlayer)
-                + " now has "
-                + purses[currentPlayer]
-                + " Gold Coins.");
+        log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
     }
 
     private void advanceToNextPlayer() {
@@ -140,8 +135,8 @@ public class Game {
     }
 
     public boolean wrongAnswer() {
-        System.out.println("Question was incorrectly answered");
-        System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
+        log("Question was incorrectly answered");
+        log("%s was sent to the penalty box", players.get(currentPlayer));
         inPenaltyBox[currentPlayer] = true;
         boolean winner = didCurrentPlayerWin();
         advanceToNextPlayer();
