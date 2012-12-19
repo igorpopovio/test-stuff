@@ -1,4 +1,4 @@
-package runner;
+package trivia;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
-import static runner.GameRunner.createGame;
+import static trivia.GameRunner.createGame;
 
 public class GameRunnerTest {
     private static final String GOLDEN_MASTER_DIR_NAME = "golden-master";

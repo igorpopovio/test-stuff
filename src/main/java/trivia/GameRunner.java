@@ -1,6 +1,4 @@
-package runner;
-
-import uglytrivia.Game;
+package trivia;
 
 import java.util.Random;
 
