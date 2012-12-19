@@ -46,11 +46,9 @@ public class Game {
 
     private void doIfNotInPenaltyBox(int roll) {
         updatePlace(roll);
-
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
                 + places[currentPlayer]);
-        System.out.println("The category is " + currentCategory());
         askQuestion();
     }
 
@@ -81,6 +79,7 @@ public class Game {
     }
 
     private void askQuestion() {
+        System.out.println("The category is " + currentCategory());
         if (currentCategory() == "Pop")
             System.out.println(popQuestions.removeFirst());
         if (currentCategory() == "Science")
