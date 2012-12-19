@@ -58,7 +58,7 @@ public class Game {
 
     private void updatePlace(int roll) {
         places[currentPlayer] += roll;
-        if (places[currentPlayer] > 11) places[currentPlayer] -= 12;
+        places[currentPlayer] %= 12;
     }
 
     private void doIfInPenaltyBox(int roll) {
