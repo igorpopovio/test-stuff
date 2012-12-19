@@ -7,7 +7,6 @@ import java.util.List;
 public class Game {
     public static final int MAX_PLAYERS = 6;
 
-    List<String> players = new ArrayList<>();
     List<Player> playersList = new ArrayList<>();
     int[] places = new int[MAX_PLAYERS];
     int[] purses = new int[MAX_PLAYERS];
@@ -35,7 +34,6 @@ public class Game {
     }
 
     public void add(String playerName) {
-        players.add(playerName);
         playersList.add(new Player(playerName));
         log("%s was added", playerName);
         log("They are player number %d", playersList.size());
@@ -129,7 +127,7 @@ public class Game {
 
     private void advanceToNextPlayer() {
         currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        if (currentPlayer == playersList.size()) currentPlayer = 0;
     }
 
     private boolean didCurrentPlayerWin() {
