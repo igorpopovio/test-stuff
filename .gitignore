@@ -1,7 +1,19 @@
+# Intellij IDEA files
+out
+*.iml
+*.ipr
+*.iws
+
+# Eclipse files
 bin
-build
 .classpath
 .project
 .settings
+
+# Gradle files
 .gradle
+build
+
+# Vim files
 *~
+
