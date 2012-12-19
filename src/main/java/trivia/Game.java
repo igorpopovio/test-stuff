@@ -46,10 +46,12 @@ public class Game {
 
     private void doIfNotInPenaltyBox(int roll) {
         updatePlace(roll);
-        System.out.println(players.get(currentPlayer)
-                + "'s new location is "
-                + places[currentPlayer]);
+        log("%s's new location is %d", players.get(currentPlayer), places[currentPlayer]);
         askQuestion();
+    }
+
+    public void log(String format, Object... args) {
+        System.out.println(String.format(format, args));
     }
 
     private void updatePlace(int roll) {
