@@ -80,13 +80,13 @@ public class Game {
 
     private void askQuestion() {
         log("The category is %s", currentCategory());
-        if (currentCategory() == "Pop")
+        if (currentCategory().equals("Pop"))
             log(popQuestions.removeFirst());
-        if (currentCategory() == "Science")
+        if (currentCategory().equals("Science"))
             log(scienceQuestions.removeFirst());
-        if (currentCategory() == "Sports")
+        if (currentCategory().equals("Sports"))
             log(sportsQuestions.removeFirst());
-        if (currentCategory() == "Rock")
+        if (currentCategory().equals("Rock"))
             log(rockQuestions.removeFirst());
     }
 
