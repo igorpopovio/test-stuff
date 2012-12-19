@@ -45,14 +45,18 @@ public class Game {
     }
 
     private void doIfCurrentPlayerIsNotInPenaltyBox(int roll) {
-        places[currentPlayer] = places[currentPlayer] + roll;
-        if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+        updatePlaceForCurrentPlayer(roll);
 
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
                 + places[currentPlayer]);
         System.out.println("The category is " + currentCategory());
         askQuestion();
+    }
+
+    private void updatePlaceForCurrentPlayer(int roll) {
+        places[currentPlayer] = places[currentPlayer] + roll;
+        if (places[currentPlayer] > 11) places[currentPlayer] -= 12;
     }
 
     private void doIfCurrentPlayerIsInPenaltyBox(int roll) {
