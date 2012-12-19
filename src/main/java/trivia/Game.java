@@ -40,15 +40,19 @@ public class Game {
     }
 
     public void roll(int roll) {
-        log("%s is the current player", players.get(currentPlayer));
+        log("%s is the current player", currentPlayer());
         log("They have rolled a %d", roll);
         if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
     }
 
+    private Player currentPlayer() {
+        return players.get(currentPlayer);
+    }
+
     private void doIfOutOfPenaltyBox(int roll) {
         updatePlace(roll);
-        log("%s's new location is %d", players.get(currentPlayer), places[currentPlayer]);
+        log("%s's new location is %d", currentPlayer(), places[currentPlayer]);
         askQuestion();
     }
 
@@ -70,12 +74,12 @@ public class Game {
 
     private void keepInPenaltyBox() {
         isGettingOutOfPenaltyBox = false;
-        log("%s is not getting out of the penalty box", players.get(currentPlayer));
+        log("%s is not getting out of the penalty box", currentPlayer());
     }
 
     private void moveOutOfPenaltyBox() {
         isGettingOutOfPenaltyBox = true;
-        log("%s is getting out of the penalty box", players.get(currentPlayer));
+        log("%s is getting out of the penalty box", currentPlayer());
     }
 
     private void askQuestion() {
@@ -122,7 +126,7 @@ public class Game {
     private void correctAnswer() {
         log("Answer was correct!!!!");
         purses[currentPlayer]++;
-        log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
+        log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
     private void advanceToNextPlayer() {
@@ -136,7 +140,7 @@ public class Game {
 
     public boolean wrongAnswer() {
         log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", players.get(currentPlayer));
+        log("%s was sent to the penalty box", currentPlayer());
         inPenaltyBox[currentPlayer] = true;
         boolean winner = didCurrentPlayerWin();
         advanceToNextPlayer();
