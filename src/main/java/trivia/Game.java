@@ -8,6 +8,7 @@ public class Game {
     public static final int MAX_PLAYERS = 6;
 
     List<String> players = new ArrayList<>();
+    List<Player> playersList = new ArrayList<>();
     int[] places = new int[MAX_PLAYERS];
     int[] purses = new int[MAX_PLAYERS];
     boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
@@ -35,12 +36,13 @@ public class Game {
 
     public void add(String playerName) {
         players.add(playerName);
+        playersList.add(new Player(playerName));
         log("%s was added", playerName);
-        log("They are player number %d", players.size());
+        log("They are player number %d", playersList.size());
     }
 
     public void roll(int roll) {
-        log("%s is the current player", players.get(currentPlayer));
+        log("%s is the current player", playersList.get(currentPlayer));
         log("They have rolled a %d", roll);
         if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
@@ -48,12 +50,12 @@ public class Game {
 
     private void doIfOutOfPenaltyBox(int roll) {
         updatePlace(roll);
-        log("%s's new location is %d", players.get(currentPlayer), places[currentPlayer]);
+        log("%s's new location is %d", playersList.get(currentPlayer), places[currentPlayer]);
         askQuestion();
     }
 
     private void updatePlace(int roll) {
-        places[currentPlayer] = places[currentPlayer] + roll;
+        places[currentPlayer] += roll;
         if (places[currentPlayer] > 11) places[currentPlayer] -= 12;
     }
 
@@ -70,12 +72,12 @@ public class Game {
 
     private void keepInPenaltyBox() {
         isGettingOutOfPenaltyBox = false;
-        log("%s is not getting out of the penalty box", players.get(currentPlayer));
+        log("%s is not getting out of the penalty box", playersList.get(currentPlayer));
     }
 
     private void moveOutOfPenaltyBox() {
         isGettingOutOfPenaltyBox = true;
-        log("%s is getting out of the penalty box", players.get(currentPlayer));
+        log("%s is getting out of the penalty box", playersList.get(currentPlayer));
     }
 
     private void askQuestion() {
@@ -122,7 +124,7 @@ public class Game {
     private void correctAnswer() {
         log("Answer was correct!!!!");
         purses[currentPlayer]++;
-        log("%s now has %d Gold Coins.", players.get(currentPlayer), purses[currentPlayer]);
+        log("%s now has %d Gold Coins.", playersList.get(currentPlayer), purses[currentPlayer]);
     }
 
     private void advanceToNextPlayer() {
@@ -136,7 +138,7 @@ public class Game {
 
     public boolean wrongAnswer() {
         log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", players.get(currentPlayer));
+        log("%s was sent to the penalty box", playersList.get(currentPlayer));
         inPenaltyBox[currentPlayer] = true;
         boolean winner = didCurrentPlayerWin();
         advanceToNextPlayer();
