@@ -91,14 +91,16 @@ public class Game {
     }
 
     private void doIfInPenaltyBox(int roll) {
-        if (shouldMoveOutOfPenaltyBox(roll)) {
-            moveOutOfPenaltyBox();
-            doIfOutOfPenaltyBox(roll);
-        } else keepInPenaltyBox();
+        if (shouldKeepInPenaltyBox(roll)) {
+            keepInPenaltyBox();
+            return;
+        }
+        moveOutOfPenaltyBox();
+        doIfOutOfPenaltyBox(roll);
     }
 
-    private boolean shouldMoveOutOfPenaltyBox(int roll) {
-        return roll % 2 != 0;
+    private boolean shouldKeepInPenaltyBox(int roll) {
+        return roll % 2 == 0;
     }
 
     private void keepInPenaltyBox() {
