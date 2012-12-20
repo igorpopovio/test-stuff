@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import static trivia.Logger.log;
+
 public class Game {
     public static final int MAX_PLAYERS = 6;
 
@@ -19,10 +21,6 @@ public class Game {
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-
-    public void log(String format, Object... args) {
-        System.out.println(String.format(format, args));
-    }
 
     public Game() {
         for (int i = 0; i < 50; i++) {
