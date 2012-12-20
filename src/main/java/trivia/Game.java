@@ -114,7 +114,8 @@ public class Game {
     }
 
     private boolean shouldProvideCorrectAnswer() {
-        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) || !inPenaltyBox[currentPlayer];
+        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) ||
+                !inPenaltyBox[currentPlayer];
     }
 
     private void provideCorrectAnswer() {
