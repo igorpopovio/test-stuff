@@ -46,7 +46,7 @@ public class Game {
 
     public void advanceToNextPlayer() {
         currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        currentPlayer %= players.size();
     }
 
     public void wasCorrectlyAnswered() {
