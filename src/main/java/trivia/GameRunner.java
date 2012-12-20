@@ -26,11 +26,19 @@ public class GameRunner {
     public void run() {
         do {
             game.advanceToNextPlayer();
-            game.roll(random.nextInt(5) + 1);
-            if (random.nextInt(9) != 7)
+            game.roll(rollDie());
+            if (shouldAnswerCorrectly())
                 game.wasCorrectlyAnswered();
             else
                 game.wrongAnswer();
         } while (!game.isGameOver());
+    }
+
+    private boolean shouldAnswerCorrectly() {
+        return random.nextInt(9) != 7;
+    }
+
+    private int rollDie() {
+        return random.nextInt(5) + 1;
     }
 }
