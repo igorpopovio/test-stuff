@@ -30,7 +30,7 @@ public class GameRunner {
             if (shouldAnswerCorrectly())
                 game.provideCorrectAnswer();
             else
-                game.wrongAnswer();
+                game.provideWrongAnswer();
         } while (!game.isGameOver());
     }
 

@@ -56,7 +56,7 @@ public class Game {
         log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
-    public void wrongAnswer() {
+    public void provideWrongAnswer() {
         log("Question was incorrectly answered");
         log("%s was sent to the penalty box", currentPlayer());
         inPenaltyBox[currentPlayer] = true;
