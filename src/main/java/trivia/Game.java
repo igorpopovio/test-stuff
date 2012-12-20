@@ -58,8 +58,12 @@ public class Game {
 
     public void provideWrongAnswer() {
         log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", currentPlayer());
+        movePlayerToPenaltyBox();
+    }
+
+    private void movePlayerToPenaltyBox() {
         inPenaltyBox[currentPlayer] = true;
+        log("%s was sent to the penalty box", currentPlayer());
     }
 
     public boolean isGameOver() {
