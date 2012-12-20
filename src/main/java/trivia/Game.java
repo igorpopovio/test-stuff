@@ -107,15 +107,8 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) {
-            correctAnswer();
-            boolean winner = didCurrentPlayerWin();
-            advanceToNextPlayer();
-            return winner;
-        }
-        if (!inPenaltyBox[currentPlayer]) {
-            correctAnswer();
-        }
+        if (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) correctAnswer();
+        if (!inPenaltyBox[currentPlayer]) correctAnswer();
         boolean winner = didCurrentPlayerWin();
         advanceToNextPlayer();
         return winner;
