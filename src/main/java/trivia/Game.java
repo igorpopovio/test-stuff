@@ -107,16 +107,19 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) correctAnswer();
-        if (!inPenaltyBox[currentPlayer]) correctAnswer();
+        if (shouldProvideCorrectAnswer()) provideCorrectAnswer();
         boolean winner = didCurrentPlayerWin();
         advanceToNextPlayer();
         return winner;
     }
 
-    private void correctAnswer() {
-        log("Answer was correct!!!!");
+    private boolean shouldProvideCorrectAnswer() {
+        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) || !inPenaltyBox[currentPlayer];
+    }
+
+    private void provideCorrectAnswer() {
         purses[currentPlayer]++;
+        log("Answer was correct!!!!");
         log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
