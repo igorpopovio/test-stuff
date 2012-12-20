@@ -62,7 +62,7 @@ public class GameRunnerTest {
 
         String expectedOutput = readFromGoldenMasterFor(seed);
         String actualOutput = stream.toString();
-        assertEquals(expectedOutput, actualOutput);
+        assertEquals("Output differs for seed = " + seed, expectedOutput, actualOutput);
     }
 
     @Test
