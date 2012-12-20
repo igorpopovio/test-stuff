@@ -44,6 +44,37 @@ public class Game {
         else doIfOutOfPenaltyBox(roll);
     }
 
+    public void advanceToNextPlayer() {
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
+    }
+
+    public void wasCorrectlyAnswered() {
+        if (shouldProvideCorrectAnswer())
+            provideCorrectAnswer();
+    }
+
+    public void wrongAnswer() {
+        log("Question was incorrectly answered");
+        log("%s was sent to the penalty box", currentPlayer());
+        inPenaltyBox[currentPlayer] = true;
+    }
+
+    public boolean isGameOver() {
+        return purses[currentPlayer] == 6;
+    }
+
+    private boolean shouldProvideCorrectAnswer() {
+        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) ||
+                !inPenaltyBox[currentPlayer];
+    }
+
+    private void provideCorrectAnswer() {
+        purses[currentPlayer]++;
+        log("Answer was correct!!!!");
+        log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
+    }
+
     private Player currentPlayer() {
         return players.get(currentPlayer);
     }
@@ -104,36 +135,5 @@ public class Game {
         if (places[currentPlayer] == 6) return "Sports";
         if (places[currentPlayer] == 10) return "Sports";
         return "Rock";
-    }
-
-    public void wasCorrectlyAnswered() {
-        if (shouldProvideCorrectAnswer())
-            provideCorrectAnswer();
-    }
-
-    private boolean shouldProvideCorrectAnswer() {
-        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) ||
-                !inPenaltyBox[currentPlayer];
-    }
-
-    private void provideCorrectAnswer() {
-        purses[currentPlayer]++;
-        log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
-    }
-
-    public void advanceToNextPlayer() {
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
-    }
-
-    public boolean isGameOver() {
-        return purses[currentPlayer] == 6;
-    }
-
-    public void wrongAnswer() {
-        log("Question was incorrectly answered");
-        log("%s was sent to the penalty box", currentPlayer());
-        inPenaltyBox[currentPlayer] = true;
     }
 }
