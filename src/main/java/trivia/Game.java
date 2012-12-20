@@ -49,9 +49,11 @@ public class Game {
         log("%s is the current player", currentPlayer());
     }
 
-    public void wasCorrectlyAnswered() {
-        if (shouldProvideCorrectAnswer())
-            provideCorrectAnswer();
+    public void provideCorrectAnswer() {
+        if (!isAllowedToAnswer()) return;
+        purses[currentPlayer]++;
+        log("Answer was correct!!!!");
+        log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
     public void wrongAnswer() {
@@ -64,15 +66,9 @@ public class Game {
         return purses[currentPlayer] == 6;
     }
 
-    private boolean shouldProvideCorrectAnswer() {
+    private boolean isAllowedToAnswer() {
         return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) ||
                 !inPenaltyBox[currentPlayer];
-    }
-
-    private void provideCorrectAnswer() {
-        purses[currentPlayer]++;
-        log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
     private Player currentPlayer() {

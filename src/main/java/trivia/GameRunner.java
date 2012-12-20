@@ -28,7 +28,7 @@ public class GameRunner {
             game.advanceToNextPlayer();
             game.roll(rollDie());
             if (shouldAnswerCorrectly())
-                game.wasCorrectlyAnswered();
+                game.provideCorrectAnswer();
             else
                 game.wrongAnswer();
         } while (!game.isGameOver());
