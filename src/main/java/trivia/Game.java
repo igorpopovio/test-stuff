@@ -58,10 +58,10 @@ public class Game {
 
     public void provideWrongAnswer() {
         log("Question was incorrectly answered");
-        movePlayerToPenaltyBox();
+        moveToPenaltyBox();
     }
 
-    private void movePlayerToPenaltyBox() {
+    private void moveToPenaltyBox() {
         inPenaltyBox[currentPlayer] = true;
         log("%s was sent to the penalty box", currentPlayer());
     }
