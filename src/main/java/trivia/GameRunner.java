@@ -32,6 +32,7 @@ public class GameRunner {
                 isGameOver = game.wasCorrectlyAnswered();
             else
                 isGameOver = game.wrongAnswer();
+            game.advanceToNextPlayer();
         } while (!isGameOver);
     }
 }

@@ -109,7 +109,6 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (shouldProvideCorrectAnswer()) provideCorrectAnswer();
         boolean winner = didCurrentPlayerWin();
-        advanceToNextPlayer();
         return winner;
     }
 
@@ -124,7 +123,7 @@ public class Game {
         log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
-    private void advanceToNextPlayer() {
+    public void advanceToNextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
@@ -138,7 +137,6 @@ public class Game {
         log("%s was sent to the penalty box", currentPlayer());
         inPenaltyBox[currentPlayer] = true;
         boolean winner = didCurrentPlayerWin();
-        advanceToNextPlayer();
         return winner;
     }
 }
