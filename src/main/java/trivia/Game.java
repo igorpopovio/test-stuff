@@ -38,7 +38,6 @@ public class Game {
     }
 
     public void roll(int roll) {
-        log("%s is the current player", currentPlayer());
         log("They have rolled a %d", roll);
         if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
@@ -47,6 +46,7 @@ public class Game {
     public void advanceToNextPlayer() {
         currentPlayer++;
         currentPlayer %= players.size();
+        log("%s is the current player", currentPlayer());
     }
 
     public void wasCorrectlyAnswered() {
