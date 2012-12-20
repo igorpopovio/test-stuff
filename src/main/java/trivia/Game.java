@@ -50,14 +50,12 @@ public class Game {
     }
 
     public void provideCorrectAnswer() {
-        if (!isAllowedToAnswer()) return;
         purses[currentPlayer]++;
         log("Answer was correct!!!!");
         log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
     }
 
     public void provideWrongAnswer() {
-        if (!isAllowedToAnswer()) return;
         log("Question was incorrectly answered");
         moveToPenaltyBox();
     }
@@ -71,7 +69,7 @@ public class Game {
         return purses[currentPlayer] == 6;
     }
 
-    private boolean isAllowedToAnswer() {
+    public boolean isAllowedToAnswer() {
         return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox[currentPlayer]) ||
                 !inPenaltyBox[currentPlayer];
     }

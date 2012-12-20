@@ -115,8 +115,8 @@ Chet is the current player
 They have rolled a 4
 Chet is not getting out of the penalty box
 Pat is the current player
-They have rolled a 5
-Pat's new location is 9
+They have rolled a 1
+Pat's new location is 5
 The category is Science
 Science Question 2
 Answer was correct!!!!

@@ -27,11 +27,16 @@ public class GameRunner {
         do {
             game.advanceToNextPlayer();
             game.roll(rollDie());
-            if (shouldAnswerCorrectly())
-                game.provideCorrectAnswer();
-            else
-                game.provideWrongAnswer();
+            if (game.isAllowedToAnswer())
+                provideAnswer();
         } while (!game.isGameOver());
+    }
+
+    private void provideAnswer() {
+        if (shouldAnswerCorrectly())
+            game.provideCorrectAnswer();
+        else
+            game.provideWrongAnswer();
     }
 
     private boolean shouldAnswerCorrectly() {
