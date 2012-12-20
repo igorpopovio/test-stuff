@@ -31,9 +31,9 @@ public class Game {
         }
     }
 
-    public void add(String playerName) {
-        players.add(new Player(playerName));
-        log("%s was added", playerName);
+    public void add(Player player) {
+        players.add(player);
+        log("%s was added", player);
         log("They are player number %d", players.size());
     }
 
