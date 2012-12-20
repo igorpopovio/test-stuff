@@ -57,6 +57,7 @@ public class Game {
     }
 
     public void provideWrongAnswer() {
+        if (!isAllowedToAnswer()) return;
         log("Question was incorrectly answered");
         moveToPenaltyBox();
     }
