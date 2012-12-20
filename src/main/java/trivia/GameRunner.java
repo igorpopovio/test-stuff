@@ -24,15 +24,13 @@ public class GameRunner {
     }
 
     public void run() {
-        boolean isGameOver;
         do {
-            game.roll(random.nextInt(5) + 1);
-
-            if (random.nextInt(9) != 7)
-                isGameOver = game.wasCorrectlyAnswered();
-            else
-                isGameOver = game.wrongAnswer();
             game.advanceToNextPlayer();
-        } while (!isGameOver);
+            game.roll(random.nextInt(5) + 1);
+            if (random.nextInt(9) != 7)
+                game.wasCorrectlyAnswered();
+            else
+                game.wrongAnswer();
+        } while (!game.isGameOver());
     }
 }

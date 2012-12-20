@@ -19,7 +19,7 @@ public class Game {
     LinkedList<String> sportsQuestions = new LinkedList<>();
     LinkedList<String> rockQuestions = new LinkedList<>();
 
-    int currentPlayer = 0;
+    int currentPlayer = -1;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
@@ -106,10 +106,9 @@ public class Game {
         return "Rock";
     }
 
-    public boolean wasCorrectlyAnswered() {
-        if (shouldProvideCorrectAnswer()) provideCorrectAnswer();
-        boolean winner = didCurrentPlayerWin();
-        return winner;
+    public void wasCorrectlyAnswered() {
+        if (shouldProvideCorrectAnswer())
+            provideCorrectAnswer();
     }
 
     private boolean shouldProvideCorrectAnswer() {
@@ -128,15 +127,13 @@ public class Game {
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
-    private boolean didCurrentPlayerWin() {
+    public boolean isGameOver() {
         return purses[currentPlayer] == 6;
     }
 
-    public boolean wrongAnswer() {
+    public void wrongAnswer() {
         log("Question was incorrectly answered");
         log("%s was sent to the penalty box", currentPlayer());
         inPenaltyBox[currentPlayer] = true;
-        boolean winner = didCurrentPlayerWin();
-        return winner;
     }
 }
