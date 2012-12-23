@@ -13,7 +13,7 @@ public class Game {
     int[] places = new int[MAX_PLAYERS];
     int[] purses = new int[MAX_PLAYERS];
     boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
-    boolean[] isGettingOutOfPenaltyBox = new boolean[MAX_PLAYERS];
+    boolean isGettingOutOfPenaltyBox;
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -70,7 +70,7 @@ public class Game {
     }
 
     public boolean isAllowedToAnswer() {
-        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox[currentPlayer]) ||
+        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) ||
                 !inPenaltyBox[currentPlayer];
     }
 
@@ -103,12 +103,12 @@ public class Game {
     }
 
     private void keepInPenaltyBox() {
-        isGettingOutOfPenaltyBox[currentPlayer] = false;
+        isGettingOutOfPenaltyBox = false;
         log("%s is not getting out of the penalty box", currentPlayer());
     }
 
     private void moveOutOfPenaltyBox() {
-        isGettingOutOfPenaltyBox[currentPlayer] = true;
+        isGettingOutOfPenaltyBox = true;
         log("%s is getting out of the penalty box", currentPlayer());
     }
 
