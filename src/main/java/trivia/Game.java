@@ -11,7 +11,6 @@ public class Game {
 
     List<Player> players = new ArrayList<>();
     int[] places = new int[MAX_PLAYERS];
-    boolean isGettingOutOfPenaltyBox;
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -61,8 +60,7 @@ public class Game {
     }
 
     public boolean isAllowedToAnswer() {
-        return (currentPlayer().isInPenaltyBox() && isGettingOutOfPenaltyBox) ||
-                !currentPlayer().isInPenaltyBox();
+        return currentPlayer().isAllowedToAnswer();
     }
 
     private Player currentPlayer() {
@@ -94,13 +92,11 @@ public class Game {
     }
 
     private void keepInPenaltyBox() {
-        isGettingOutOfPenaltyBox = false;
-        log("%s is not getting out of the penalty box", currentPlayer());
+        currentPlayer().keepInPenaltyBox();
     }
 
     private void moveOutOfPenaltyBox() {
-        isGettingOutOfPenaltyBox = true;
-        log("%s is getting out of the penalty box", currentPlayer());
+        currentPlayer().moveOutOfPenaltyBox();
     }
 
     private void askQuestion() {
