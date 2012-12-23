@@ -11,7 +11,6 @@ public class Game {
 
     List<Player> players = new ArrayList<>();
     int[] places = new int[MAX_PLAYERS];
-    int[] purses = new int[MAX_PLAYERS];
     boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
     boolean isGettingOutOfPenaltyBox;
 
@@ -50,9 +49,7 @@ public class Game {
     }
 
     public void provideCorrectAnswer() {
-        purses[currentPlayer]++;
-        log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", currentPlayer(), purses[currentPlayer]);
+        currentPlayer().provideCorrectAnswer();
     }
 
     public void provideWrongAnswer() {
@@ -66,7 +63,7 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return purses[currentPlayer] == 6;
+        return currentPlayer().getCoins() == 6;
     }
 
     public boolean isAllowedToAnswer() {
