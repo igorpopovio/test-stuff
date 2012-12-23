@@ -12,22 +12,13 @@ public class Game {
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
 
-    DefaultQuestionBoard board;
+    private List<String> categories;
+    private QuestionBoard board;
 
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
 
-    public Game() {
-        initializeBoardWithQuestions();
-    }
-
-    private void initializeBoardWithQuestions() {
-        board = new DefaultQuestionBoard();
-        for (int i = 0; i < 50; i++) {
-            board.addQuestion(new Question("Pop", "Pop Question " + i));
-            board.addQuestion(new Question("Science", "Science Question " + i));
-            board.addQuestion(new Question("Sports", "Sports Question " + i));
-            board.addQuestion(new Question("Rock", "Rock Question " + i));
-        }
+    public Game(QuestionBoard questionBoard) {
+        board = questionBoard;
     }
 
     public void add(Player player) {
