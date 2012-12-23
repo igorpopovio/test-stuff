@@ -19,13 +19,9 @@ public class GeneratedQuestionBoardFactory implements QuestionBoardFactory {
         DefaultQuestionBoard board = new DefaultQuestionBoard();
         int timesToIterate = questionsPerCategory * categories.size();
         Iterator<String> categoryIterator = new CircularIterator<>(categories);
-        for (int i = 0; i < timesToIterate; i++) {
-            int questionIndex = i;
-            for (int j = 0; j < categories.size(); j++) {
-                String category = categoryIterator.next();
-                board.addQuestion(createQuestion(questionIndex, category));
-            }
-        }
+        for (int i = 0; i < timesToIterate; i++)
+            for (int j = 0; j < categories.size(); j++)
+                board.addQuestion(createQuestion(i, categoryIterator.next()));
         return board;
     }
 
