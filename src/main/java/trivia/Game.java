@@ -7,13 +7,13 @@ import java.util.List;
 import static trivia.Logger.log;
 
 public class Game {
-    public static final int MAX_PLAYERS = 6;
+    public static final int MAX_NUMBER_OF_PLAYERS = 6;
     public static final int MAX_NUMBER_OF_PLACES = 12;
 
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
 
-    int[] places = new int[MAX_PLAYERS];
+    int[] places = new int[MAX_NUMBER_OF_PLAYERS];
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
