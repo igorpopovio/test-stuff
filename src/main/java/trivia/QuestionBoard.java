@@ -2,6 +2,7 @@ package trivia;
 
 import com.google.common.collect.LinkedListMultimap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionBoard {
@@ -22,6 +23,10 @@ public class QuestionBoard {
         Question question = questionsInCategory.get(0);
         questions.remove(category, question);
         return question;
+    }
+
+    public List<String> getCategories() {
+        return new ArrayList<>(questions.keySet());
     }
 
     public static class NoQuestionAvailableException
