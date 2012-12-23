@@ -8,6 +8,7 @@ import static trivia.Logger.log;
 
 public class Game {
     public static final int MAX_PLAYERS = 6;
+    public static final int MAX_NUMBER_OF_PLACES = 12;
 
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
@@ -75,7 +76,7 @@ public class Game {
 
     private void updatePlace(int roll) {
         places[currentPlayer] += roll;
-        places[currentPlayer] %= 12;
+        places[currentPlayer] %= MAX_NUMBER_OF_PLACES;
     }
 
     private void doIfInPenaltyBox(int roll) {
