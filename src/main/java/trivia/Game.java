@@ -10,14 +10,14 @@ public class Game {
     public static final int MAX_PLAYERS = 6;
 
     List<Player> players = new ArrayList<>();
+    int currentPlayer = -1;
+
     int[] places = new int[MAX_PLAYERS];
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
     LinkedList<String> sportsQuestions = new LinkedList<>();
-
     LinkedList<String> rockQuestions = new LinkedList<>();
-    int currentPlayer = -1;
 
     public Game() {
         for (int i = 0; i < 50; i++) {
