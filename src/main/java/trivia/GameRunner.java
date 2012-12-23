@@ -8,16 +8,10 @@ public class GameRunner {
     private Game game;
     private Random random;
 
-    public static QuestionBoard createQuestionBoard() {
+    public static Game createGame() {
         List<String> categories = Arrays.asList(
                 "Pop", "Science", "Sports", "Rock");
-        GeneratedQuestionBoardFactory boardFactory =
-                new GeneratedQuestionBoardFactory(categories, 50);
-        return boardFactory.createBoard();
-    }
-
-    public static Game createGame() {
-        Game aGame = new Game(createQuestionBoard());
+        Game aGame = new Game(categories);
         aGame.add(new Player("Chet"));
         aGame.add(new Player("Pat"));
         aGame.add(new Player("Sue"));

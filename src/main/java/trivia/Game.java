@@ -8,6 +8,7 @@ import static trivia.Logger.log;
 public class Game {
     public static final int MAX_NUMBER_OF_PLAYERS = 6;
     public static final int MAX_NUMBER_OF_PLACES = 12;
+    public static final int QUESTIONS_PER_CATEGORY = 50;
 
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
@@ -17,8 +18,15 @@ public class Game {
 
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
 
-    public Game(QuestionBoard questionBoard) {
-        board = questionBoard;
+    public Game(List<String> categories) {
+        this.categories = categories;
+        board = createBoard();
+    }
+
+    private QuestionBoard createBoard() {
+        GeneratedQuestionBoardFactory factory = new GeneratedQuestionBoardFactory(
+                categories, QUESTIONS_PER_CATEGORY);
+        return factory.createBoard();
     }
 
     public void add(Player player) {
