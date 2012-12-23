@@ -12,7 +12,7 @@ public class Game {
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
 
-    QuestionBoard board;
+    DefaultQuestionBoard board;
 
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
 
@@ -21,7 +21,7 @@ public class Game {
     }
 
     private void initializeBoardWithQuestions() {
-        board = new QuestionBoard();
+        board = new DefaultQuestionBoard();
         for (int i = 0; i < 50; i++) {
             board.addQuestion(new Question("Pop", "Pop Question " + i));
             board.addQuestion(new Question("Science", "Science Question " + i));

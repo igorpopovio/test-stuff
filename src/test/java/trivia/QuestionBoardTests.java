@@ -6,13 +6,13 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static trivia.QuestionBoard.NoQuestionAvailableException;
+import static trivia.DefaultQuestionBoard.NoQuestionAvailableException;
 
 public class QuestionBoardTests {
     private static final String DEFAULT_CATEGORY = "category";
     private Question question1;
     private Question question2;
-    private QuestionBoard board;
+    private DefaultQuestionBoard board;
 
     private Question createQuestion(String text) {
         return new Question(DEFAULT_CATEGORY, text);
@@ -22,7 +22,7 @@ public class QuestionBoardTests {
     public void setUp() throws Exception {
         question1 = createQuestion("question 1");
         question2 = createQuestion("question 2");
-        board = new QuestionBoard();
+        board = new DefaultQuestionBoard();
     }
 
     @Test
