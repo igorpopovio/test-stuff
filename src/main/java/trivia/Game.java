@@ -1,6 +1,7 @@
 package trivia;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static trivia.Logger.log;
@@ -17,10 +18,19 @@ public class Game {
     private QuestionBoard board;
 
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
+    List<String> boardPlaces;
 
     public Game(List<String> categories) {
         this.categories = categories;
         board = createBoard();
+        initializeBoardPlaces();
+    }
+
+    private void initializeBoardPlaces() {
+        boardPlaces = new ArrayList<>();
+        Iterator<String> iterator = new CircularIterator<>(categories);
+        for (int i = 0; i < MAX_NUMBER_OF_PLACES; i++)
+            boardPlaces.add(iterator.next());
     }
 
     private QuestionBoard createBoard() {
@@ -108,15 +118,6 @@ public class Game {
     }
 
     private String currentCategory() {
-        if (places[currentPlayer] == 0) return "Pop";
-        if (places[currentPlayer] == 4) return "Pop";
-        if (places[currentPlayer] == 8) return "Pop";
-        if (places[currentPlayer] == 1) return "Science";
-        if (places[currentPlayer] == 5) return "Science";
-        if (places[currentPlayer] == 9) return "Science";
-        if (places[currentPlayer] == 2) return "Sports";
-        if (places[currentPlayer] == 6) return "Sports";
-        if (places[currentPlayer] == 10) return "Sports";
-        return "Rock";
+        return boardPlaces.get(places[currentPlayer]);
     }
 }
