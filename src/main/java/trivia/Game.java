@@ -1,7 +1,6 @@
 package trivia;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static trivia.Logger.log;
@@ -13,19 +12,21 @@ public class Game {
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
 
+    QuestionBoard board;
+
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
 
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
-
     public Game() {
+        initializeBoardWithQuestions();
+    }
+
+    private void initializeBoardWithQuestions() {
+        board = new QuestionBoard();
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast("Science Question " + i);
-            sportsQuestions.addLast("Sports Question " + i);
-            rockQuestions.addLast("Rock Question " + i);
+            board.addQuestion(new Question("Pop", "Pop Question " + i));
+            board.addQuestion(new Question("Science", "Science Question " + i));
+            board.addQuestion(new Question("Sports", "Sports Question " + i));
+            board.addQuestion(new Question("Rock", "Rock Question " + i));
         }
     }
 
@@ -103,14 +104,8 @@ public class Game {
     private void askQuestion() {
         String category = currentCategory();
         log("The category is %s", category);
-        if ("Pop".equals(category))
-            log(popQuestions.removeFirst());
-        if ("Science".equals(category))
-            log(scienceQuestions.removeFirst());
-        if ("Sports".equals(category))
-            log(sportsQuestions.removeFirst());
-        if ("Rock".equals(category))
-            log(rockQuestions.removeFirst());
+        Question question = board.getNextQuestionFor(category);
+        log(question.getText());
     }
 
     private String currentCategory() {

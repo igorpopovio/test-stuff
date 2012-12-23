@@ -14,6 +14,10 @@ public class Question {
         return category;
     }
 
+    public String getText() {
+        return text;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
