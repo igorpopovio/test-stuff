@@ -11,7 +11,6 @@ public class Game {
 
     List<Player> players = new ArrayList<>();
     int[] places = new int[MAX_PLAYERS];
-    boolean[] inPenaltyBox = new boolean[MAX_PLAYERS];
     boolean isGettingOutOfPenaltyBox;
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -38,7 +37,7 @@ public class Game {
 
     public void roll(int roll) {
         log("They have rolled a %d", roll);
-        if (inPenaltyBox[currentPlayer]) doIfInPenaltyBox(roll);
+        if (currentPlayer().isInPenaltyBox()) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
     }
 
@@ -54,12 +53,7 @@ public class Game {
 
     public void provideWrongAnswer() {
         log("Question was incorrectly answered");
-        moveToPenaltyBox();
-    }
-
-    private void moveToPenaltyBox() {
-        inPenaltyBox[currentPlayer] = true;
-        log("%s was sent to the penalty box", currentPlayer());
+        currentPlayer().moveToPenaltyBox();
     }
 
     public boolean isGameOver() {
@@ -67,8 +61,8 @@ public class Game {
     }
 
     public boolean isAllowedToAnswer() {
-        return (inPenaltyBox[currentPlayer] && isGettingOutOfPenaltyBox) ||
-                !inPenaltyBox[currentPlayer];
+        return (currentPlayer().isInPenaltyBox() && isGettingOutOfPenaltyBox) ||
+                !currentPlayer().isInPenaltyBox();
     }
 
     private Player currentPlayer() {
