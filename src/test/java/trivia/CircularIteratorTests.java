@@ -9,8 +9,8 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 
 public class CircularIteratorTests {
-    private CircularIterator makeCircularIteratorFor(List<?> list) {
-        return new CircularIterator(list);
+    private <T> CircularIterator<T> makeCircularIteratorFor(List<T> list) {
+        return new CircularIterator<>(list);
     }
 
     @Test
