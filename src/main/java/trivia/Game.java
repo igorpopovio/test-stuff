@@ -5,13 +5,13 @@ import java.util.List;
 import static trivia.Logger.log;
 
 public class Game {
-    private CircularIterator<Player> players;
+    private RingIterator<Player> players;
     private Player currentPlayer;
     private Board board;
 
     public Game(List<String> categories, List<Player> players) {
         logAddedPlayers(players);
-        this.players = new CircularIterator<>(players);
+        this.players = new RingIterator<>(players);
         this.board = new Board(categories, players);
     }
 

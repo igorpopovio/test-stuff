@@ -3,11 +3,11 @@ package trivia;
 import java.util.Iterator;
 import java.util.List;
 
-public class CircularIterator<T> implements Iterator<T> {
+public class RingIterator<T> implements Iterator<T> {
     private List<T> list;
     private Iterator<T> iterator;
 
-    public CircularIterator(List<T> list) {
+    public RingIterator(List<T> list) {
         this.list = list;
         this.iterator = list.iterator();
     }

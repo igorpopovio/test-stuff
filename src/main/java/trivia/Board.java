@@ -27,7 +27,7 @@ public class Board {
 
     private void initializePlaceCategories() {
         placeCategories = new ArrayList<>();
-        Iterator<String> iterator = new CircularIterator<>(categories);
+        Iterator<String> iterator = new RingIterator<>(categories);
         for (int i = 0; i < MAX_NUMBER_OF_PLACES; i++)
             placeCategories.add(iterator.next());
     }

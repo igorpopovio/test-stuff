@@ -8,26 +8,26 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 
-public class CircularIteratorTests {
-    private <T> CircularIterator<T> makeCircularIteratorFor(List<T> list) {
-        return new CircularIterator<>(list);
+public class RingIteratorTests {
+    private <T> RingIterator<T> createRingIteratorFor(List<T> list) {
+        return new RingIterator<>(list);
     }
 
     @Test
     public void emptyListDoesNotHaveNextElements() throws Exception {
-        Iterator iterator = makeCircularIteratorFor(asList());
+        Iterator iterator = createRingIteratorFor(asList());
         assertFalse(iterator.hasNext());
     }
 
     @Test
     public void listWithSingleElementHasNext() throws Exception {
-        assertTrue(makeCircularIteratorFor(asList(1)).hasNext());
+        assertTrue(createRingIteratorFor(asList(1)).hasNext());
     }
 
     @Test
     public void listWithSingleElementGivesSameElementOverAndOverAgain() throws Exception {
         List<Integer> list = asList(1);
-        CircularIterator iterator = makeCircularIteratorFor(list);
+        RingIterator iterator = createRingIteratorFor(list);
         assertEquals(1, iterator.next());
         assertEquals(1, iterator.next());
         assertEquals(1, iterator.next());
@@ -36,7 +36,7 @@ public class CircularIteratorTests {
     @Test
     public void listWithTwoElementsGivesSameElementsOverAndOverAgain() throws Exception {
         List<Integer> list = asList(2, 3);
-        CircularIterator iterator = makeCircularIteratorFor(list);
+        RingIterator iterator = createRingIteratorFor(list);
         assertEquals(2, iterator.next());
         assertEquals(3, iterator.next());
         assertEquals(2, iterator.next());

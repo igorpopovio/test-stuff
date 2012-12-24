@@ -8,7 +8,7 @@ public class GeneratedQuestionFactory {
             List<String> categories, int questionsPerCategory) {
         QuestionsProvider board = new QuestionsProvider();
         int timesToIterate = questionsPerCategory * categories.size();
-        Iterator<String> categoryIterator = new CircularIterator<>(categories);
+        Iterator<String> categoryIterator = new RingIterator<>(categories);
         for (int i = 0; i < timesToIterate; i++)
             for (int j = 0; j < categories.size(); j++)
                 board.addQuestion(createQuestion(i, categoryIterator.next()));
