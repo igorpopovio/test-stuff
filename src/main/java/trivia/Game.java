@@ -91,13 +91,7 @@ public class Game {
     }
 
     private void askQuestion() {
-        String category = currentCategory();
-        log("The category is %s", category);
-        Question question = board.provideQuestionFor(currentPlayer());
-        log(question.getText());
-    }
-
-    private String currentCategory() {
-        return board.getCurrentCategoryFor(currentPlayer());
+        log("The category is %s", board.getCurrentCategoryFor(currentPlayer()));
+        log("" + board.provideQuestionFor(currentPlayer()));
     }
 }
