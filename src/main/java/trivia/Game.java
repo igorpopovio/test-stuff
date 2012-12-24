@@ -51,34 +51,22 @@ public class Game {
     }
 
     private void doIfOutOfPenaltyBox(int roll) {
-        updatePlace(roll);
+        board.updatePlace(currentPlayer, roll);
         log("%s's new location is %d", currentPlayer, board.getCurrentPlaceFor(currentPlayer));
         askQuestion();
     }
 
-    private void updatePlace(int roll) {
-        board.updatePlace(currentPlayer, roll);
-    }
-
     private void doIfInPenaltyBox(int roll) {
         if (shouldKeepInPenaltyBox(roll)) {
-            keepInPenaltyBox();
+            currentPlayer.keepInPenaltyBox();
             return;
         }
-        moveOutOfPenaltyBox();
+        currentPlayer.moveOutOfPenaltyBox();
         doIfOutOfPenaltyBox(roll);
     }
 
     private boolean shouldKeepInPenaltyBox(int roll) {
         return roll % 2 == 0;
-    }
-
-    private void keepInPenaltyBox() {
-        currentPlayer.keepInPenaltyBox();
-    }
-
-    private void moveOutOfPenaltyBox() {
-        currentPlayer.moveOutOfPenaltyBox();
     }
 
     private void askQuestion() {
