@@ -28,6 +28,7 @@ public class Runner {
     }
 
     public void run() {
+        game.start();
         do {
             game.advanceToNextPlayer();
             game.roll(rollDie());

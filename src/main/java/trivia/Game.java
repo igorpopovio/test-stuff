@@ -1,47 +1,29 @@
 package trivia;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static trivia.Logger.log;
 
 public class Game {
-    public static final int MAX_NUMBER_OF_PLAYERS = 6;
-    public static final int MAX_NUMBER_OF_PLACES = 12;
-    public static final int QUESTIONS_PER_CATEGORY = 50;
-
     List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
 
     private List<String> categories;
-    private QuestionsProvider questionsProvider;
-
-    int[] places = new int[MAX_NUMBER_OF_PLAYERS];
-    List<String> placeCategories;
+    private Board board;
 
     public Game(List<String> categories) {
         this.categories = categories;
-        questionsProvider = createBoard();
-        initializePlaceCategories();
-    }
-
-    private void initializePlaceCategories() {
-        placeCategories = new ArrayList<>();
-        Iterator<String> iterator = new CircularIterator<>(categories);
-        for (int i = 0; i < MAX_NUMBER_OF_PLACES; i++)
-            placeCategories.add(iterator.next());
-    }
-
-    private QuestionsProvider createBoard() {
-        GeneratedQuestionFactory factory = new GeneratedQuestionFactory();
-        return factory.createQuestions(categories, QUESTIONS_PER_CATEGORY);
     }
 
     public void add(Player player) {
         players.add(player);
         log("%s was added", player);
         log("They are player number %d", players.size());
+    }
+
+    public void start() {
+        board = new Board(categories, players);
     }
 
     public void roll(int roll) {
@@ -79,13 +61,12 @@ public class Game {
 
     private void doIfOutOfPenaltyBox(int roll) {
         updatePlace(roll);
-        log("%s's new location is %d", currentPlayer(), places[currentPlayer]);
+        log("%s's new location is %d", currentPlayer(), board.getCurrentPlaceFor(currentPlayer()));
         askQuestion();
     }
 
     private void updatePlace(int roll) {
-        places[currentPlayer] += roll;
-        places[currentPlayer] %= MAX_NUMBER_OF_PLACES;
+        board.updatePlace(currentPlayer(), roll);
     }
 
     private void doIfInPenaltyBox(int roll) {
@@ -112,11 +93,11 @@ public class Game {
     private void askQuestion() {
         String category = currentCategory();
         log("The category is %s", category);
-        Question question = questionsProvider.getNextQuestionFor(category);
+        Question question = board.provideQuestionFor(currentPlayer());
         log(question.getText());
     }
 
     private String currentCategory() {
-        return placeCategories.get(places[currentPlayer]);
+        return board.getCurrentCategoryFor(currentPlayer());
     }
 }
