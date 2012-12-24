@@ -1,21 +1,25 @@
 package trivia;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import static java.util.Arrays.asList;
 
 public class Runner {
     private Game game;
     private Random random;
 
     public static Game createGame() {
-        List<String> categories = Arrays.asList(
-                "Pop", "Science", "Sports", "Rock");
-        Game aGame = new Game(categories);
-        aGame.add(new Player("Chet"));
-        aGame.add(new Player("Pat"));
-        aGame.add(new Player("Sue"));
-        return aGame;
+        List<String> categories = asList(
+                "Pop",
+                "Science",
+                "Sports",
+                "Rock");
+        List<Player> players = asList(
+                new Player("Chet"),
+                new Player("Pat"),
+                new Player("Sue"));
+        return new Game(categories, players);
     }
 
     public Runner(Game game, Random random) {
@@ -28,7 +32,6 @@ public class Runner {
     }
 
     public void run() {
-        game.start();
         do {
             game.advanceToNextPlayer();
             game.roll(rollDie());

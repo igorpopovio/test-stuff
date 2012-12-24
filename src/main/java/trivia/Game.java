@@ -1,29 +1,27 @@
 package trivia;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static trivia.Logger.log;
 
 public class Game {
-    List<Player> players = new ArrayList<>();
     int currentPlayer = -1;
-
+    List<Player> players;
     private List<String> categories;
     private Board board;
 
-    public Game(List<String> categories) {
+    public Game(List<String> categories, List<Player> players) {
         this.categories = categories;
+        this.players = players;
+        logAddedPlayers(players);
+        this.board = new Board(categories, players);
     }
 
-    public void add(Player player) {
-        players.add(player);
-        log("%s was added", player);
-        log("They are player number %d", players.size());
-    }
-
-    public void start() {
-        board = new Board(categories, players);
+    private void logAddedPlayers(List<Player> players) {
+        for (int i = 0; i < players.size(); i++) {
+            log("%s was added", players.get(i));
+            log("They are player number %d", i + 1);
+        }
     }
 
     public void roll(int roll) {
