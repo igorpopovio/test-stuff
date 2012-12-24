@@ -18,19 +18,19 @@ public class Game {
     private QuestionBoard board;
 
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
-    List<String> boardPlaces;
+    List<String> placeCategories;
 
     public Game(List<String> categories) {
         this.categories = categories;
         board = createBoard();
-        initializeBoardPlaces();
+        initializePlaceCategories();
     }
 
-    private void initializeBoardPlaces() {
-        boardPlaces = new ArrayList<>();
+    private void initializePlaceCategories() {
+        placeCategories = new ArrayList<>();
         Iterator<String> iterator = new CircularIterator<>(categories);
         for (int i = 0; i < MAX_NUMBER_OF_PLACES; i++)
-            boardPlaces.add(iterator.next());
+            placeCategories.add(iterator.next());
     }
 
     private QuestionBoard createBoard() {
@@ -118,6 +118,6 @@ public class Game {
     }
 
     private String currentCategory() {
-        return boardPlaces.get(places[currentPlayer]);
+        return placeCategories.get(places[currentPlayer]);
     }
 }
