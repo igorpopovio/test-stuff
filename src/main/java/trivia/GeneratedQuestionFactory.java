@@ -3,20 +3,10 @@ package trivia;
 import java.util.Iterator;
 import java.util.List;
 
-public class GeneratedQuestionBoardFactory implements QuestionBoardFactory {
-    private List<String> categories;
-    private int questionsPerCategory;
-
-    public GeneratedQuestionBoardFactory(
-            List<String> categories,
-            int questionsPerCategory) {
-        this.categories = categories;
-        this.questionsPerCategory = questionsPerCategory;
-    }
-
-    @Override
-    public QuestionBoard createBoard() {
-        DefaultQuestionBoard board = new DefaultQuestionBoard();
+public class GeneratedQuestionFactory {
+    public QuestionsProvider createQuestions(
+            List<String> categories, int questionsPerCategory) {
+        QuestionsProvider board = new QuestionsProvider();
         int timesToIterate = questionsPerCategory * categories.size();
         Iterator<String> categoryIterator = new CircularIterator<>(categories);
         for (int i = 0; i < timesToIterate; i++)

@@ -11,9 +11,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
-import static trivia.GameRunner.createGame;
+import static trivia.Runner.createGame;
 
-public class GameRunnerTest {
+public class RunnerTest {
     private static final String GOLDEN_MASTER_DIR_NAME = "golden-master";
     private static final long DEFAULT_SEED_LIMIT = 100;
 
@@ -43,7 +43,7 @@ public class GameRunnerTest {
 
     private void saveConsoleOutputFor(long seed) throws FileNotFoundException {
         saveConsoleOutputInFile(new File(getFileNameFor(seed)));
-        new GameRunner(createGame(), new Random(seed)).run();
+        new Runner(createGame(), new Random(seed)).run();
     }
 
     private void redirectConsoleOutputTo(ByteArrayOutputStream stream) {
@@ -58,7 +58,7 @@ public class GameRunnerTest {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         redirectConsoleOutputTo(stream);
 
-        new GameRunner(createGame(), new Random(seed)).run();
+        new Runner(createGame(), new Random(seed)).run();
 
         String expectedOutput = readFromGoldenMasterFor(seed);
         String actualOutput = stream.toString();

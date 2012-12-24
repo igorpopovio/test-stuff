@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class GameRunner {
+public class Runner {
     private Game game;
     private Random random;
 
@@ -18,13 +18,13 @@ public class GameRunner {
         return aGame;
     }
 
-    public GameRunner(Game game, Random random) {
+    public Runner(Game game, Random random) {
         this.game = game;
         this.random = random;
     }
 
     public static void main(String[] args) {
-        new GameRunner(createGame(), new Random()).run();
+        new Runner(createGame(), new Random()).run();
     }
 
     public void run() {

@@ -5,10 +5,10 @@ import com.google.common.collect.LinkedListMultimap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultQuestionBoard implements QuestionBoard {
+public class QuestionsProvider {
     private LinkedListMultimap<String, Question> questions;
 
-    public DefaultQuestionBoard() {
+    public QuestionsProvider() {
         questions = LinkedListMultimap.create();
     }
 

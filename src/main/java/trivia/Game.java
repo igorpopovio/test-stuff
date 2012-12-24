@@ -15,14 +15,14 @@ public class Game {
     int currentPlayer = -1;
 
     private List<String> categories;
-    private QuestionBoard board;
+    private QuestionsProvider questionsProvider;
 
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
     List<String> placeCategories;
 
     public Game(List<String> categories) {
         this.categories = categories;
-        board = createBoard();
+        questionsProvider = createBoard();
         initializePlaceCategories();
     }
 
@@ -33,10 +33,9 @@ public class Game {
             placeCategories.add(iterator.next());
     }
 
-    private QuestionBoard createBoard() {
-        GeneratedQuestionBoardFactory factory = new GeneratedQuestionBoardFactory(
-                categories, QUESTIONS_PER_CATEGORY);
-        return factory.createBoard();
+    private QuestionsProvider createBoard() {
+        GeneratedQuestionFactory factory = new GeneratedQuestionFactory();
+        return factory.createQuestions(categories, QUESTIONS_PER_CATEGORY);
     }
 
     public void add(Player player) {
@@ -113,7 +112,7 @@ public class Game {
     private void askQuestion() {
         String category = currentCategory();
         log("The category is %s", category);
-        Question question = board.getNextQuestionFor(category);
+        Question question = questionsProvider.getNextQuestionFor(category);
         log(question.getText());
     }
 

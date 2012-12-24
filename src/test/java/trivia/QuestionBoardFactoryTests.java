@@ -12,12 +12,12 @@ import static org.junit.Assert.assertEquals;
 public class QuestionBoardFactoryTests {
     private static final String CATEGORY1 = "Category1";
     private static final String CATEGORY2 = "Category2";
-    private QuestionBoard board;
+    private QuestionsProvider board;
 
     @Before
     public void setUp() throws Exception {
         List<String> categories = asList(CATEGORY1, CATEGORY2);
-        board = new GeneratedQuestionBoardFactory(categories, 4).createBoard();
+        board = new GeneratedQuestionFactory().createQuestions(categories, 4);
     }
 
     @Test
