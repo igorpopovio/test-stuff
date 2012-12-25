@@ -11,24 +11,6 @@ public abstract class Player {
         this.name = name;
     }
 
-    public boolean isInPenaltyBox() {
-        return isInPenaltyBox;
-    }
-
-    public void moveInPenaltyBox() {
-        isInPenaltyBox = true;
-        log("%s was sent to the penalty box", this);
-    }
-
-    public void keepInPenaltyBox() {
-        log("%s is not getting out of the penalty box", this);
-    }
-
-    public void moveOutOfPenaltyBox() {
-        isInPenaltyBox = false;
-        log("%s is getting out of the penalty box", this);
-    }
-
     public abstract String provideAnswerFor(Question question);
 
     public int getCoins() {

@@ -1,11 +1,13 @@
 package trivia;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import static trivia.Logger.log;
 
 public class Game {
+    private List<Player> penaltyBox;
     private RingIterator<Player> players;
     private Player currentPlayer;
     private Board board;
@@ -16,6 +18,7 @@ public class Game {
         this.players = new RingIterator<>(players);
         this.board = new Board(categories, players);
         this.random = random;
+        this.penaltyBox = new ArrayList<>();
     }
 
     private void logAddedPlayers(List<Player> players) {
@@ -27,7 +30,7 @@ public class Game {
 
     public void roll(int roll) {
         log("They have rolled a %d", roll);
-        if (currentPlayer.isInPenaltyBox()) doIfInPenaltyBox(roll);
+        if (isInPenaltyBox()) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
     }
 
@@ -65,7 +68,12 @@ public class Game {
 
     private void doIfAnswerIsWrong() {
         log("Question was incorrectly answered");
-        currentPlayer.moveInPenaltyBox();
+        moveInPenaltyBox();
+    }
+
+    private void moveInPenaltyBox() {
+        penaltyBox.add(currentPlayer);
+        log("%s was sent to the penalty box", currentPlayer);
     }
 
     private void doIfAnswerIsCorrect() {
@@ -76,11 +84,20 @@ public class Game {
 
     private void doIfInPenaltyBox(int roll) {
         if (shouldKeepInPenaltyBox(roll)) {
-            currentPlayer.keepInPenaltyBox();
+            keepInPenaltyBox();
             return;
         }
-        currentPlayer.moveOutOfPenaltyBox();
+        moveOutOfPenaltyBox();
         doIfOutOfPenaltyBox(roll);
+    }
+
+    private void moveOutOfPenaltyBox() {
+        log("%s is getting out of the penalty box", currentPlayer);
+        penaltyBox.remove(currentPlayer);
+    }
+
+    private void keepInPenaltyBox() {
+        log("%s is not getting out of the penalty box", currentPlayer);
     }
 
     private boolean shouldKeepInPenaltyBox(int roll) {
@@ -96,5 +113,9 @@ public class Game {
 
     private int rollDie() {
         return random.nextInt(5) + 1;
+    }
+
+    public boolean isInPenaltyBox() {
+        return penaltyBox.contains(currentPlayer);
     }
 }
