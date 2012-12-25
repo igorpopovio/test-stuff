@@ -29,10 +29,6 @@ public abstract class Player {
         log("%s is getting out of the penalty box", this);
     }
 
-    public boolean canAnswer() {
-        return !isInPenaltyBox();
-    }
-
     public abstract String provideAnswerFor(Question question);
 
     public int getCoins() {
