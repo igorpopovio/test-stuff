@@ -15,7 +15,7 @@ public class QuestionBoardTests {
     private QuestionsProvider board;
 
     private Question createQuestion(String text) {
-        return new Question(DEFAULT_CATEGORY, text);
+        return new Question(DEFAULT_CATEGORY, text, "correct answer");
     }
 
     @Before
@@ -46,11 +46,10 @@ public class QuestionBoardTests {
 
     @Test
     public void retrievingAllCategories() throws Exception {
-        board.addQuestion(new Question("c1", "not.important"));
-        board.addQuestion(new Question("c2", "not.important"));
-        board.addQuestion(new Question("c3", "not.important"));
-        board.addQuestion(new Question("c3", "not.important"));
+        board.addQuestion(new Question("c1", "not.important", "correct answer"));
+        board.addQuestion(new Question("c2", "not.important", "correct answer"));
+        board.addQuestion(new Question("c3", "not.important", "correct answer"));
+        board.addQuestion(new Question("c3", "not.important", "correct answer"));
         assertEquals(Arrays.asList("c1", "c2", "c3"), board.getCategories());
     }
-
 }

@@ -16,7 +16,7 @@ public class GeneratedQuestionFactory {
     }
 
     private Question createQuestion(int index, String category) {
-        return new Question(category, createQuestionText(index, category));
+        return new Question(category, createQuestionText(index, category), "correct answer");
     }
 
     private String createQuestionText(int index, String category) {
