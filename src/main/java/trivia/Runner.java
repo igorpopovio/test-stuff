@@ -1,5 +1,6 @@
 package trivia;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,10 +16,10 @@ public class Runner {
                 "Science",
                 "Sports",
                 "Rock");
-        List<Player> players = asList(
-                new Player("Chet", random),
-                new Player("Pat", random),
-                new Player("Sue", random));
+        List<Player> players = new ArrayList<>();
+        players.add(new AiPlayer("Chet", random));
+        players.add(new AiPlayer("Pat", random));
+        players.add(new AiPlayer("Sue", random));
         return new Game(categories, players);
     }
 
