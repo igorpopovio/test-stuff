@@ -33,7 +33,7 @@ public abstract class Player {
         return !isInPenaltyBox();
     }
 
-    public abstract void provideAnswer();
+    public abstract String provideAnswerFor(Question question);
 
     public int getCoins() {
         return coins;

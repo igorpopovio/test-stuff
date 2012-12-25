@@ -45,7 +45,22 @@ public class Game {
         board.updatePlace(currentPlayer, roll);
         log("%s's new location is %d", currentPlayer, board.getCurrentPlaceFor(currentPlayer));
         askQuestion();
-        currentPlayer.provideAnswer();
+    }
+
+    private void askQuestion() {
+        log("The category is %s", board.getCurrentCategoryFor(currentPlayer));
+        Question question = board.provideQuestionFor(currentPlayer);
+        log(question.getText());
+
+        String answer = currentPlayer.provideAnswerFor(question);
+        if (question.isCorrectAnswer(answer)) {
+            currentPlayer.giveOneCoin();
+            log("Answer was correct!!!!");
+            log("%s now has %d Gold Coins.", currentPlayer, currentPlayer.getCoins());
+        } else {
+            log("Question was incorrectly answered");
+            currentPlayer.moveInPenaltyBox();
+        }
     }
 
     private void doIfInPenaltyBox(int roll) {
@@ -59,11 +74,6 @@ public class Game {
 
     private boolean shouldKeepInPenaltyBox(int roll) {
         return roll % 2 == 0;
-    }
-
-    private void askQuestion() {
-        log("The category is %s", board.getCurrentCategoryFor(currentPlayer));
-        log("" + board.provideQuestionFor(currentPlayer));
     }
 
     public void run() {

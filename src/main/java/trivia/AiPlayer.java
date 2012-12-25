@@ -16,25 +16,14 @@ public class AiPlayer extends Player {
         this.random = random;
     }
 
-    public void provideAnswer() {
+    public String provideAnswerFor(Question question) {
         if (shouldAnswerCorrectly())
-            provideCorrectAnswer();
+            return question.getCorrectAnswer();
         else
-            provideWrongAnswer();
+            return "an answer that is very likely wrong";
     }
 
     private boolean shouldAnswerCorrectly() {
         return random.nextInt(9) != 7;
-    }
-
-    private void provideCorrectAnswer() {
-        giveOneCoin();
-        log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", this, getCoins());
-    }
-
-    private void provideWrongAnswer() {
-        log("Question was incorrectly answered");
-        moveInPenaltyBox();
     }
 }
