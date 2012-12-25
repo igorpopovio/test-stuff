@@ -14,18 +14,10 @@ public class Game {
     private Random random;
 
     public Game(List<String> categories, List<Player> players, Random random) {
-        logAddedPlayers(players);
         this.players = new RingIterator<>(players);
         this.board = new Board(categories, players);
         this.random = random;
         this.penaltyBox = new ArrayList<>();
-    }
-
-    private void logAddedPlayers(List<Player> players) {
-        for (int i = 0; i < players.size(); i++) {
-            log("%s was added", players.get(i));
-            log("They are player number %d", i + 1);
-        }
     }
 
     public void roll(int roll) {
