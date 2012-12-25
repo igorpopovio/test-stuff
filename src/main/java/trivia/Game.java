@@ -34,10 +34,9 @@ public class Game {
         else doIfOutOfPenaltyBox(roll);
     }
 
-    public Player nextPlayer() {
+    public void nextPlayer() {
         currentPlayer = players.next();
         log("%s is the current player", currentPlayer);
-        return currentPlayer;
     }
 
     public boolean isGameOver() {
