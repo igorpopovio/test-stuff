@@ -44,7 +44,7 @@ public class RunnerTest {
     private void saveConsoleOutputFor(long seed) throws FileNotFoundException {
         saveConsoleOutputInFile(new File(getFileNameFor(seed)));
         Random random = new Random(seed);
-        new Runner(createGame(random), random).run();
+        createGame(random).run();
     }
 
     private void redirectConsoleOutputTo(ByteArrayOutputStream stream) {
@@ -60,7 +60,7 @@ public class RunnerTest {
         redirectConsoleOutputTo(stream);
 
         Random random = new Random(seed);
-        new Runner(createGame(random), random).run();
+        createGame(random).run();
 
         String expectedOutput = readFromGoldenMasterFor(seed);
         String actualOutput = stream.toString();

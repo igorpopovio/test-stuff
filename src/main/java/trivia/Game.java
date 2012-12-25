@@ -1,6 +1,7 @@
 package trivia;
 
 import java.util.List;
+import java.util.Random;
 
 import static trivia.Logger.log;
 
@@ -8,11 +9,13 @@ public class Game {
     private RingIterator<Player> players;
     private Player currentPlayer;
     private Board board;
+    private Random random;
 
-    public Game(List<String> categories, List<Player> players) {
+    public Game(List<String> categories, List<Player> players, Random random) {
         logAddedPlayers(players);
         this.players = new RingIterator<>(players);
         this.board = new Board(categories, players);
+        this.random = random;
     }
 
     private void logAddedPlayers(List<Player> players) {
@@ -60,5 +63,18 @@ public class Game {
     private void askQuestion() {
         log("The category is %s", board.getCurrentCategoryFor(currentPlayer));
         log("" + board.provideQuestionFor(currentPlayer));
+    }
+
+    public void run() {
+        do {
+            nextPlayer();
+            roll(rollDie());
+            if (currentPlayer.canAnswer())
+                currentPlayer.provideAnswer();
+        } while (!isGameOver());
+    }
+
+    private int rollDie() {
+        return random.nextInt(5) + 1;
     }
 }
