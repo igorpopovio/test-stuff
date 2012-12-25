@@ -28,26 +28,14 @@ public class Game {
         else doIfOutOfPenaltyBox(roll);
     }
 
-    public void advanceToNextPlayer() {
+    public Player nextPlayer() {
         currentPlayer = players.next();
         log("%s is the current player", currentPlayer);
-    }
-
-    public void provideCorrectAnswer() {
-        currentPlayer.provideCorrectAnswer();
-    }
-
-    public void provideWrongAnswer() {
-        log("Question was incorrectly answered");
-        currentPlayer.moveToPenaltyBox();
+        return currentPlayer;
     }
 
     public boolean isGameOver() {
         return currentPlayer.getCoins() == 6;
-    }
-
-    public boolean isAllowedToAnswer() {
-        return currentPlayer.isAllowedToAnswer();
     }
 
     private void doIfOutOfPenaltyBox(int roll) {

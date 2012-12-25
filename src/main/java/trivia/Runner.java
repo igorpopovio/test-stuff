@@ -9,16 +9,16 @@ public class Runner {
     private Game game;
     private Random random;
 
-    public static Game createGame() {
+    public static Game createGame(Random random) {
         List<String> categories = asList(
                 "Pop",
                 "Science",
                 "Sports",
                 "Rock");
         List<Player> players = asList(
-                new Player("Chet"),
-                new Player("Pat"),
-                new Player("Sue"));
+                new Player("Chet", random),
+                new Player("Pat", random),
+                new Player("Sue", random));
         return new Game(categories, players);
     }
 
@@ -28,27 +28,17 @@ public class Runner {
     }
 
     public static void main(String[] args) {
-        new Runner(createGame(), new Random()).run();
+        Random random = new Random();
+        new Runner(createGame(random), random).run();
     }
 
     public void run() {
         do {
-            game.advanceToNextPlayer();
+            Player player = game.nextPlayer();
             game.roll(rollDie());
-            if (game.isAllowedToAnswer())
-                provideAnswer();
+            if (player.canAnswer())
+                player.provideAnswer();
         } while (!game.isGameOver());
-    }
-
-    private void provideAnswer() {
-        if (shouldAnswerCorrectly())
-            game.provideCorrectAnswer();
-        else
-            game.provideWrongAnswer();
-    }
-
-    private boolean shouldAnswerCorrectly() {
-        return random.nextInt(9) != 7;
     }
 
     private int rollDie() {
