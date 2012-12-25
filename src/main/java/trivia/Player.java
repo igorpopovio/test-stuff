@@ -1,11 +1,8 @@
 package trivia;
 
-import static trivia.Logger.log;
-
 public abstract class Player {
     private String name;
     private int coins;
-    private boolean isInPenaltyBox;
 
     public Player(String name) {
         this.name = name;
