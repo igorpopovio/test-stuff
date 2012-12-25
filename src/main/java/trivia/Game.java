@@ -45,6 +45,7 @@ public class Game {
         board.updatePlace(currentPlayer, roll);
         log("%s's new location is %d", currentPlayer, board.getCurrentPlaceFor(currentPlayer));
         askQuestion();
+        currentPlayer.provideAnswer();
     }
 
     private void doIfInPenaltyBox(int roll) {
@@ -69,8 +70,6 @@ public class Game {
         do {
             nextPlayer();
             roll(rollDie());
-            if (currentPlayer.canAnswer())
-                currentPlayer.provideAnswer();
         } while (!isGameOver());
     }
 
