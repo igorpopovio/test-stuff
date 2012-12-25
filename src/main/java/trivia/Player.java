@@ -1,14 +1,11 @@
 package trivia;
 
-import java.util.Random;
-
 import static trivia.Logger.log;
 
 public abstract class Player {
     private String name;
     private int coins;
     private boolean isInPenaltyBox;
-    private boolean isGettingOutOfPenaltyBox;
 
     public Player(String name) {
         this.name = name;
@@ -24,18 +21,17 @@ public abstract class Player {
     }
 
     public void keepInPenaltyBox() {
-        isGettingOutOfPenaltyBox = false;
+        isInPenaltyBox = true;
         log("%s is not getting out of the penalty box", this);
     }
 
     public void moveOutOfPenaltyBox() {
-        isGettingOutOfPenaltyBox = true;
+        isInPenaltyBox = false;
         log("%s is getting out of the penalty box", this);
     }
 
     public boolean canAnswer() {
-        return (isInPenaltyBox() && isGettingOutOfPenaltyBox) ||
-                !isInPenaltyBox();
+        return !isInPenaltyBox();
     }
 
     public abstract void provideAnswer();
