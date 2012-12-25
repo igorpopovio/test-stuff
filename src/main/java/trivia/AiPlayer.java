@@ -35,6 +35,6 @@ public class AiPlayer extends Player {
 
     private void provideWrongAnswer() {
         log("Question was incorrectly answered");
-        moveToPenaltyBox();
+        moveInPenaltyBox();
     }
 }

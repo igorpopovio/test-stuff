@@ -15,13 +15,12 @@ public abstract class Player {
         return isInPenaltyBox;
     }
 
-    public void moveToPenaltyBox() {
+    public void moveInPenaltyBox() {
         isInPenaltyBox = true;
         log("%s was sent to the penalty box", this);
     }
 
     public void keepInPenaltyBox() {
-        isInPenaltyBox = true;
         log("%s is not getting out of the penalty box", this);
     }
 
