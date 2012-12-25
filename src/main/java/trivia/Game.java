@@ -42,9 +42,13 @@ public class Game {
     }
 
     private void doIfOutOfPenaltyBox(int roll) {
+        updatePlace(roll);
+        askQuestion();
+    }
+
+    private void updatePlace(int roll) {
         board.updatePlace(currentPlayer, roll);
         log("%s's new location is %d", currentPlayer, board.getCurrentPlaceFor(currentPlayer));
-        askQuestion();
     }
 
     private void askQuestion() {
