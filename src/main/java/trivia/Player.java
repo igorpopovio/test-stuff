@@ -35,8 +35,8 @@ public abstract class Player {
         return coins;
     }
 
-    public void giveOneCoin() {
-        coins++;
+    public void giveCoins(int coins) {
+        this.coins += coins;
     }
 
     @Override

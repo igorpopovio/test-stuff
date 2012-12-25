@@ -69,7 +69,7 @@ public class Game {
     }
 
     private void doIfAnswerIsCorrect() {
-        currentPlayer.giveOneCoin();
+        currentPlayer.giveCoins(1);
         log("Answer was correct!!!!");
         log("%s now has %d Gold Coins.", currentPlayer, currentPlayer.getCoins());
     }
