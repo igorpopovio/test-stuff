@@ -52,8 +52,8 @@ public class Game {
     }
 
     private void askQuestion() {
-        log("The category is %s", board.getCurrentCategoryFor(currentPlayer));
         Question question = board.provideQuestionFor(currentPlayer);
+        log("The category is %s", question.getCategory());
         log(question.getText());
 
         String answer = currentPlayer.provideAnswerFor(question);
