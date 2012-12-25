@@ -2,8 +2,6 @@ package trivia;
 
 import java.util.Random;
 
-import static trivia.Logger.log;
-
 public class AiPlayer extends Player {
     private Random random;
 
@@ -16,6 +14,7 @@ public class AiPlayer extends Player {
         this.random = random;
     }
 
+    @Override
     public String provideAnswerFor(Question question) {
         if (shouldAnswerCorrectly())
             return question.getCorrectAnswer();
