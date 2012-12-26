@@ -17,7 +17,7 @@ public class LoggingGame extends Game {
         super.roll(roll);
     }
 
-    protected void keepInPenaltyBox() {
+    protected void stayInPenaltyBox() {
         log("%s is not getting out of the penalty box", currentPlayer);
     }
 

@@ -51,8 +51,8 @@ public class Game {
     }
 
     protected void doIfInPenaltyBox(int roll) {
-        if (shouldKeepInPenaltyBox(roll)) {
-            keepInPenaltyBox();
+        if (shouldStayInPenaltyBox(roll)) {
+            stayInPenaltyBox();
             return;
         }
         moveOutOfPenaltyBox();
@@ -64,11 +64,11 @@ public class Game {
         askQuestion();
     }
 
-    protected boolean shouldKeepInPenaltyBox(int roll) {
+    protected boolean shouldStayInPenaltyBox(int roll) {
         return roll % 2 == 0;
     }
 
-    protected void keepInPenaltyBox() {
+    protected void stayInPenaltyBox() {
     }
 
     protected void moveOutOfPenaltyBox() {
