@@ -35,11 +35,9 @@ public class Game {
 
     protected void nextPlayer() {
         currentPlayer = players.next();
-        log("%s is the current player", currentPlayer);
     }
 
     protected void roll(int roll) {
-        log("They have rolled a %d", roll);
         if (isInPenaltyBox()) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
     }
@@ -71,17 +69,14 @@ public class Game {
     }
 
     protected void keepInPenaltyBox() {
-        log("%s is not getting out of the penalty box", currentPlayer);
     }
 
     protected void moveOutOfPenaltyBox() {
-        log("%s is getting out of the penalty box", currentPlayer);
         penaltyBox.remove(currentPlayer);
     }
 
     protected void updatePlace(int roll) {
         board.updatePlace(currentPlayer, roll);
-        log("%s's new location is %d", currentPlayer, board.getCurrentPlaceFor(currentPlayer));
     }
 
     protected void askQuestion() {
@@ -98,17 +93,13 @@ public class Game {
 
     protected void doIfAnswerIsCorrect() {
         currentPlayer.giveCoins(1);
-        log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", currentPlayer, currentPlayer.getCoins());
     }
 
     protected void doIfAnswerIsWrong() {
-        log("Question was incorrectly answered");
         moveInPenaltyBox();
     }
 
     protected void moveInPenaltyBox() {
         penaltyBox.add(currentPlayer);
-        log("%s was sent to the penalty box", currentPlayer);
     }
 }

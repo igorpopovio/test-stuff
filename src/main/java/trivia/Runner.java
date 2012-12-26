@@ -21,7 +21,7 @@ public class Runner {
         players.add(new AiPlayer("Sue", random));
         logAddedPlayers(players);
         Board board = new Board(categories, players);
-        return new Game(board, players, die);
+        return new LoggingGame(new Game(board, players, die));
     }
 
     public static void main(String[] args) {
