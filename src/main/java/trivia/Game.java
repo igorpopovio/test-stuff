@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+    public static final int COINS_TO_WIN = 6;
+
     protected Board board;
     protected RingIterator<Player> players;
     protected Player currentPlayer;
@@ -41,7 +43,7 @@ public class Game {
     }
 
     protected boolean isGameOver() {
-        return currentPlayer.getCoins() == 6;
+        return currentPlayer.getCoins() == COINS_TO_WIN;
     }
 
     protected boolean isInPenaltyBox() {
