@@ -9,6 +9,7 @@ import static trivia.Logger.log;
 
 public class Runner {
     public static Game createGame(Random random) {
+        Die die = new Die(random);
         List<String> categories = asList(
                 "Pop",
                 "Science",
@@ -19,7 +20,7 @@ public class Runner {
         players.add(new AiPlayer("Pat", random));
         players.add(new AiPlayer("Sue", random));
         logAddedPlayers(players);
-        return new Game(categories, players, random);
+        return new Game(categories, players, die);
     }
 
     public static void main(String[] args) {

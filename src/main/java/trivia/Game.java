@@ -2,7 +2,6 @@ package trivia;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static trivia.Logger.log;
 
@@ -11,19 +10,19 @@ public class Game {
     private RingIterator<Player> players;
     private Player currentPlayer;
     private Board board;
-    private Random random;
+    private Die die;
 
-    public Game(List<String> categories, List<Player> players, Random random) {
+    public Game(List<String> categories, List<Player> players, Die die) {
         this.penaltyBox = new ArrayList<>();
         this.players = new RingIterator<>(players);
         this.board = new Board(categories, players);
-        this.random = random;
+        this.die = die;
     }
 
     public void run() {
         do {
             nextPlayer();
-            roll(rollDie());
+            roll(die.roll());
         } while (!isGameOver());
     }
 
@@ -36,10 +35,6 @@ public class Game {
         log("They have rolled a %d", roll);
         if (isInPenaltyBox()) doIfInPenaltyBox(roll);
         else doIfOutOfPenaltyBox(roll);
-    }
-
-    private int rollDie() {
-        return random.nextInt(5) + 1;
     }
 
     public boolean isGameOver() {
