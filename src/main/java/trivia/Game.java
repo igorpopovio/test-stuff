@@ -6,17 +6,17 @@ import java.util.List;
 import static trivia.Logger.log;
 
 public class Game {
-    private List<Player> penaltyBox;
+    private Board board;
     private RingIterator<Player> players;
     private Player currentPlayer;
-    private Board board;
     private Die die;
+    private List<Player> penaltyBox;
 
-    public Game(List<String> categories, List<Player> players, Die die) {
-        this.penaltyBox = new ArrayList<>();
+    public Game(Board board, List<Player> players, Die die) {
+        this.board = board;
         this.players = new RingIterator<>(players);
-        this.board = new Board(categories, players);
         this.die = die;
+        this.penaltyBox = new ArrayList<>();
     }
 
     public void run() {
