@@ -14,10 +14,22 @@ public class Game {
     private Random random;
 
     public Game(List<String> categories, List<Player> players, Random random) {
+        this.penaltyBox = new ArrayList<>();
         this.players = new RingIterator<>(players);
         this.board = new Board(categories, players);
         this.random = random;
-        this.penaltyBox = new ArrayList<>();
+    }
+
+    public void run() {
+        do {
+            nextPlayer();
+            roll(rollDie());
+        } while (!isGameOver());
+    }
+
+    public void nextPlayer() {
+        currentPlayer = players.next();
+        log("%s is the current player", currentPlayer);
     }
 
     public void roll(int roll) {
@@ -26,18 +38,43 @@ public class Game {
         else doIfOutOfPenaltyBox(roll);
     }
 
-    public void nextPlayer() {
-        currentPlayer = players.next();
-        log("%s is the current player", currentPlayer);
+    private int rollDie() {
+        return random.nextInt(5) + 1;
     }
 
     public boolean isGameOver() {
         return currentPlayer.getCoins() == 6;
     }
 
+    public boolean isInPenaltyBox() {
+        return penaltyBox.contains(currentPlayer);
+    }
+
+    private void doIfInPenaltyBox(int roll) {
+        if (shouldKeepInPenaltyBox(roll)) {
+            keepInPenaltyBox();
+            return;
+        }
+        moveOutOfPenaltyBox();
+        doIfOutOfPenaltyBox(roll);
+    }
+
     private void doIfOutOfPenaltyBox(int roll) {
         updatePlace(roll);
         askQuestion();
+    }
+
+    private boolean shouldKeepInPenaltyBox(int roll) {
+        return roll % 2 == 0;
+    }
+
+    private void keepInPenaltyBox() {
+        log("%s is not getting out of the penalty box", currentPlayer);
+    }
+
+    private void moveOutOfPenaltyBox() {
+        log("%s is getting out of the penalty box", currentPlayer);
+        penaltyBox.remove(currentPlayer);
     }
 
     private void updatePlace(int roll) {
@@ -57,6 +94,12 @@ public class Game {
         else doIfAnswerIsWrong();
     }
 
+    private void doIfAnswerIsCorrect() {
+        currentPlayer.giveCoins(1);
+        log("Answer was correct!!!!");
+        log("%s now has %d Gold Coins.", currentPlayer, currentPlayer.getCoins());
+    }
+
     private void doIfAnswerIsWrong() {
         log("Question was incorrectly answered");
         moveInPenaltyBox();
@@ -65,48 +108,5 @@ public class Game {
     private void moveInPenaltyBox() {
         penaltyBox.add(currentPlayer);
         log("%s was sent to the penalty box", currentPlayer);
-    }
-
-    private void doIfAnswerIsCorrect() {
-        currentPlayer.giveCoins(1);
-        log("Answer was correct!!!!");
-        log("%s now has %d Gold Coins.", currentPlayer, currentPlayer.getCoins());
-    }
-
-    private void doIfInPenaltyBox(int roll) {
-        if (shouldKeepInPenaltyBox(roll)) {
-            keepInPenaltyBox();
-            return;
-        }
-        moveOutOfPenaltyBox();
-        doIfOutOfPenaltyBox(roll);
-    }
-
-    private void moveOutOfPenaltyBox() {
-        log("%s is getting out of the penalty box", currentPlayer);
-        penaltyBox.remove(currentPlayer);
-    }
-
-    private void keepInPenaltyBox() {
-        log("%s is not getting out of the penalty box", currentPlayer);
-    }
-
-    private boolean shouldKeepInPenaltyBox(int roll) {
-        return roll % 2 == 0;
-    }
-
-    public void run() {
-        do {
-            nextPlayer();
-            roll(rollDie());
-        } while (!isGameOver());
-    }
-
-    private int rollDie() {
-        return random.nextInt(5) + 1;
-    }
-
-    public boolean isInPenaltyBox() {
-        return penaltyBox.contains(currentPlayer);
     }
 }
