@@ -7,8 +7,8 @@ public class LoggingGame extends Game {
         super(game);
     }
 
-    protected void nextPlayer() {
-        super.nextPlayer();
+    protected void switchPlayerTurns() {
+        super.switchPlayerTurns();
         log("%s is the current player", currentPlayer);
     }
 

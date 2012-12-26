@@ -26,12 +26,12 @@ public class Game {
 
     public void run() {
         do {
-            nextPlayer();
+            switchPlayerTurns();
             roll(die.roll());
         } while (!isGameOver());
     }
 
-    protected void nextPlayer() {
+    protected void switchPlayerTurns() {
         currentPlayer = players.next();
     }
 
