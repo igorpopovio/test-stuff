@@ -3,8 +3,6 @@ package trivia;
 import java.util.ArrayList;
 import java.util.List;
 
-import static trivia.Logger.log;
-
 public class Game {
     protected Board board;
     protected RingIterator<Player> players;
@@ -80,10 +78,16 @@ public class Game {
     }
 
     protected void askQuestion() {
-        Question question = board.provideQuestionFor(currentPlayer);
-        log("The category is %s", question.getCategory());
-        log(question.getText());
-        checkAnswer(question, currentPlayer.provideAnswerFor(question));
+        Question question = provideQuestion();
+        checkAnswer(question, provideAnswerTo(question));
+    }
+
+    protected String provideAnswerTo(Question question) {
+        return currentPlayer.provideAnswerFor(question);
+    }
+
+    protected Question provideQuestion() {
+        return board.provideQuestionFor(currentPlayer);
     }
 
     protected void checkAnswer(Question question, String answer) {

@@ -31,11 +31,11 @@ public class LoggingGame extends Game {
         log("%s's new location is %d", currentPlayer, board.getCurrentPlaceFor(currentPlayer));
     }
 
-    protected void askQuestion() {
-        Question question = board.provideQuestionFor(currentPlayer);
+    protected Question provideQuestion() {
+        Question question = super.provideQuestion();
         log("The category is %s", question.getCategory());
         log(question.getText());
-        checkAnswer(question, currentPlayer.provideAnswerFor(question));
+        return question;
     }
 
     protected void doIfAnswerIsCorrect() {
