@@ -8,6 +8,10 @@ plugins {
 
 defaultTasks 'idea', 'build'
 
+group = 'trivia'
+name = 'Trivia Game'
+version = 'alfa'
+
 repositories {
     mavenCentral()
 }
