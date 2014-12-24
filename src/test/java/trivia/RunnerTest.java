@@ -62,9 +62,15 @@ public class RunnerTest {
         Random random = new Random(seed);
         createGame(random).run();
 
-        String expectedOutput = readFromGoldenMasterFor(seed);
-        String actualOutput = stream.toString();
+        String expectedOutput = normalizeLineEndings(readFromGoldenMasterFor(seed));
+        String actualOutput = normalizeLineEndings(stream.toString());
         assertEquals("Output differs for seed = " + seed, expectedOutput, actualOutput);
+    }
+
+    private String normalizeLineEndings(String string) {
+        return string
+                .replaceAll("\\r\\n", "\n")
+                .replaceAll("\\r", "\n");
     }
 
     @Test
