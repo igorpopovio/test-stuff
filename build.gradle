@@ -21,3 +21,14 @@ dependencies {
 pitest {
     targetClasses = ['trivia.*']
 }
+
+task mutationTestCoverage(type: Copy, dependsOn: 'pitest') {    
+    def dirs = []
+    pitest.reportDir.eachDir { dirs << it }
+    dirs.sort { if (it.name =~ /\d+/) Long.parseLong(it.name) }
+    def latestAnalysisDir = dirs.last()
+    def latestDir = file("$pitest.reportDir\\latest")
+
+    from latestAnalysisDir
+    into latestDir
+}
