@@ -7,7 +7,6 @@ plugins {
 }
 
 group = 'trivia'
-name = 'Trivia Game'
 version = 'alfa'
 
 defaultTasks 'idea', 'build'
