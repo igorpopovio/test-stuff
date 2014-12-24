@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'jacoco'
+    id 'sonar-runner'
 }
 
 defaultTasks 'idea', 'build'
