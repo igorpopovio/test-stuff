@@ -6,11 +6,11 @@ plugins {
     id 'info.solidsoft.pitest' version '1.1.1'
 }
 
-defaultTasks 'idea', 'build'
-
 group = 'trivia'
 name = 'Trivia Game'
 version = 'alfa'
+
+defaultTasks 'idea', 'build'
 
 repositories {
     mavenCentral()
@@ -20,19 +20,4 @@ dependencies {
     compile     'com.google.guava:guava:+'
     testCompile 'junit:junit:+',
                 'org.mockito:mockito-all:+'
-}
-
-pitest {
-    targetClasses = ['trivia.*']
-}
-
-task mutationTestCoverage(type: Copy, dependsOn: 'pitest') << {    
-    def dirs = []
-    pitest.reportDir.eachDir { dirs << it }
-    dirs.sort { if (it.name =~ /\d+/) Long.parseLong(it.name) }
-    def latestAnalysisDir = dirs.last()
-    def latestDir = file("$pitest.reportDir\\latest")
-
-    from latestAnalysisDir
-    into latestDir
 }
