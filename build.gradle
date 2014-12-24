@@ -16,7 +16,8 @@ repositories {
 }
 
 dependencies {
-    compile     'com.google.guava:guava:+'
-    testCompile 'junit:junit:+',
-                'org.mockito:mockito-all:+'
+    compile     'com.google.guava:guava:18.0'
+    testCompile 'junit:junit:4.12',
+                'org.assertj:assertj-core:1.7.0'
+                'org.mockito:mockito-all:1.10.17'
 }
